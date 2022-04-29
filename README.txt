@@ -16,7 +16,7 @@ Let me (Roeming#8394 on discord) know if anything fails
 
 Notes:
 
-No hands or bats are currently extracted, that is in the works. This is because the game loads the hands separately so you can be righty or lefty.
+Bat and ball models are grouped into the hand models, but due to quantization, don't appear right yet.
 
 No animations are currently extracted, that is in the works.
 
