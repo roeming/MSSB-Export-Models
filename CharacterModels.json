@@ -1,0 +1,490 @@
+{
+    "Decompressions": [
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Mario.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 246968,
+            "offset": 246378496,
+            "d4": 157096
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Luigi.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 274868,
+            "offset": 246536192,
+            "d4": 176684
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "DK.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 235168,
+            "offset": 246714368,
+            "d4": 159444
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Diddy.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 257420,
+            "offset": 246874112,
+            "d4": 166988
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Peach.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 223556,
+            "offset": 247042048,
+            "d4": 142836
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Daisy.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 236356,
+            "offset": 247185408,
+            "d4": 157208
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Yoshi.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 205028,
+            "offset": 247343104,
+            "d4": 138796
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Baby Mario.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 198776,
+            "offset": 247482368,
+            "d4": 122240
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Baby Luigi.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 185284,
+            "offset": 247605248,
+            "d4": 111596
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Bowser.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 217688,
+            "offset": 247717888,
+            "d4": 145628
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Wario.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 270032,
+            "offset": 247865344,
+            "d4": 170884
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Waluigi.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 267436,
+            "offset": 248037376,
+            "d4": 184672
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Koopa(R).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 190856,
+            "offset": 248223744,
+            "d4": 123068
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Toad(R).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 196304,
+            "offset": 248348672,
+            "d4": 115608
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Boo.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 130856,
+            "offset": 248465408,
+            "d4": 86016
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Toadette.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 208116,
+            "offset": 248551424,
+            "d4": 128228
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Shy Guy(R).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 138996,
+            "offset": 248680448,
+            "d4": 86292
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Birdo.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 231832,
+            "offset": 248768512,
+            "d4": 145736
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Monty.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 118328,
+            "offset": 248915968,
+            "d4": 72496
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Bowser Jr.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 208860,
+            "offset": 248989696,
+            "d4": 135508
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Paratroopa(R).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 191780,
+            "offset": 249126912,
+            "d4": 125260
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Pianta(B).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 201872,
+            "offset": 249253888,
+            "d4": 129060
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Pianta(R).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 197488,
+            "offset": 249384960,
+            "d4": 125808
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Pianta(Y).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 197488,
+            "offset": 249511936,
+            "d4": 125808
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Noki(B).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 149184,
+            "offset": 249638912,
+            "d4": 93560
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Noki(R).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 148732,
+            "offset": 249733120,
+            "d4": 93260
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Noki(G).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 148732,
+            "offset": 249827328,
+            "d4": 93304
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Bro(H).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 205864,
+            "offset": 249921536,
+            "d4": 127008
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Toadsworth.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 224472,
+            "offset": 250050560,
+            "d4": 145448
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Toad(B).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 169360,
+            "offset": 250198016,
+            "d4": 104116
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Toad(Y).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 169360,
+            "offset": 250302464,
+            "d4": 103424
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Toad(G).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 169360,
+            "offset": 250406912,
+            "d4": 103172
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Toad(P).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 169360,
+            "offset": 250511360,
+            "d4": 103184
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Magikoopa(B).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 193828,
+            "offset": 250615808,
+            "d4": 123176
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Magikoopa(R).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 193824,
+            "offset": 250740736,
+            "d4": 123136
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Magikoopa(G).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 193824,
+            "offset": 250865664,
+            "d4": 123108
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Magikoopa(Y).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 193824,
+            "offset": 250990592,
+            "d4": 123408
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "King Boo.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 150040,
+            "offset": 251115520,
+            "d4": 92828
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Petey.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 155256,
+            "offset": 251209728,
+            "d4": 105112
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Dixie.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 244028,
+            "offset": 251316224,
+            "d4": 162460
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Goomba.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 90904,
+            "offset": 251480064,
+            "d4": 63416
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Paragoomba.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 114460,
+            "offset": 251543552,
+            "d4": 75604
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Koopa(G).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 218216,
+            "offset": 251619328,
+            "d4": 146660
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Paratroopa(G).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 219104,
+            "offset": 251766784,
+            "d4": 148864
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Shy Guy(B).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 138360,
+            "offset": 251916288,
+            "d4": 86016
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Shy Guy(Y).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 124948,
+            "offset": 252002304,
+            "d4": 74832
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Shy Guy(G).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 124948,
+            "offset": 252078080,
+            "d4": 74884
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Shy Guy(Bk).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 124948,
+            "offset": 252153856,
+            "d4": 74856
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Dry Bones(Gy).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 169800,
+            "offset": 252229632,
+            "d4": 109556
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Dry Bones(G).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 169704,
+            "offset": 252340224,
+            "d4": 109432
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Dry Bones(R).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 174344,
+            "offset": 252450816,
+            "d4": 113340
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Dry Bones(B).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 169704,
+            "offset": 252565504,
+            "d4": 109388
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Bro(F).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 174056,
+            "offset": 252676096,
+            "d4": 105164
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "Bro(B).dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 172264,
+            "offset": 252782592,
+            "d4": 104476
+        }
+    ]
+}
