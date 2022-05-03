@@ -4,13 +4,10 @@ import os
 import sys
 import hashlib
 
-try:
-    import extractImages
-    import extractModel
-    import mssbDecompress
-except ImportError as err:
-    print("Please include extractImages.py, extractModel.py, and mssbDecompress.py in the same directory as this file")
-    exit()
+import extractImages
+import extractModel
+import mssbDecompress
+
 
 def main():
     err = False
