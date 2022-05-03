@@ -2,6 +2,7 @@ from genericpath import exists
 import json
 import os
 import sys
+import hashlib
 
 try:
     import extractImages
@@ -14,6 +15,7 @@ except ImportError as err:
 def main():
     err = False
     ZZZZ_file_name = "ZZZZ.dat"
+    ZZZZ_hash = "b0cd4f776d023df4dee52086cc3475a5285ce3be"
     json_file_name = "CharacterModels.json"
     json_extra_file_name = "DolReads.json"
 
@@ -26,6 +28,19 @@ def main():
 
     with open(json_extra_file_name, "r") as f:
         extra_count = len(json.load(f)["Decompressions"])
+
+    sha1 = hashlib.sha1()
+    with open(ZZZZ_file_name, 'rb') as f:
+        while True:
+            data = f.read(65536)
+            if not data:
+                break
+            sha1.update(data)
+
+    if sha1.hexdigest() != ZZZZ_hash:
+        print(f"Your {ZZZZ_file_name} doesn't match the known hash. Please re-export your file, and try again.")
+        print(f"\nAlso, please verify the dump of your rom.\nYou can do this by opening Dolphin, right clicking on your rom -> Properties -> Verify -> Verify Integrity.")
+        err = True
 
     if err:
         exit()
