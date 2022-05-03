@@ -172,21 +172,21 @@ def decompress(file_name:str, output_name:str, offset:int, size:int, b1:int, b2:
         print("Decompressed file already exists, skipping...")
         return True
     s = MSSBDecompressor(file_name, offset, size, b1, b2)
-    try:
-        a = s.decompress()
-        if a == None:
-            return False
-        else:
-            print("Finished decompressing file, writing now.")
-            with open(output_name, "wb") as f:
-                for aa in a:
-                    f.write(int.to_bytes(aa, 1, "big", signed=False))
-
-        print("Completed decompressing")
-        return True
-    except IndexError as err:
-        print(f"Failed Decompressing, {err=}")
+#    try:
+    a = s.decompress()
+    if a == None:
         return False
+    else:
+        print("Finished decompressing file, writing now.")
+        with open(output_name, "wb") as f:
+            for aa in a:
+                f.write(int.to_bytes(aa, 1, "big", signed=False))
+
+    print("Completed decompressing")
+    return True
+#    except IndexError as err:
+#        print(f"Failed Decompressing, {err=}")
+#        return False
     
 if __name__ == "__main__":
     main()
