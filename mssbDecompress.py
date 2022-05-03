@@ -3,8 +3,6 @@ from genericpath import exists
 import os
 from posixpath import dirname
 
-from numpy import sign
-
 class MSSBByteReadBuffer:
     def __init__(self, file_name: str, offset: int) -> None:
         self.file_name = file_name
