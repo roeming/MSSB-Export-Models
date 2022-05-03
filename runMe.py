@@ -45,6 +45,7 @@ def main():
     to_decompress = []
     if inp == "":
         to_decompress = [d[1] for d in names]
+        decompression_method = regular_decompress
     else:
         lines = [c.upper() for c in inp.split()]
         if "NEW" in lines:
