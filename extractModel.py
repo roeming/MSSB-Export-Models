@@ -82,7 +82,6 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
 
             if i == 0:
                 tex_coords = parse_array_values(file_bytes[dd.offsetToTextureCoordinateArray : dd.offsetToTextureCoordinateArray + (dd.numberOfCoordinates * (dd.componentSize * dd.numberOfComponents))], 2, dd.componentSize, dd.componentSize*dd.numberOfComponents, dd.componentShift, dd.componentSigned)
-                tex_coords = [(t[0], 1.0-t[1]) for t in tex_coords]
         # print()
 
         doli = DisplayObjectLightingHeader(file_bytes[dol.OffsetToLightingData:dol.OffsetToLightingData+DisplayObjectLightingHeader.size_of_struct])
@@ -106,7 +105,7 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
             
             if dod.stateID == 1: # Texture
                 h = hex(dod.setting)[2:]
-                if len(h) == 8 and h[:4] == "1511":
+                if len(h) == 8 and h[2:4] == "11":
                     texture_index = dod.setting & 0xff
                     print(f"loading Texture {texture_index}")
             elif dod.stateID == 2: # Vertex Description
@@ -153,7 +152,7 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
             for pp in norms:
                 f.write(f"vn {pp[0]} {-pp[1]} {-pp[2]}\n")
             for pp in tex_coords:
-                f.write(f"vt {pp[0]} {pp[1]}\n")
+                f.write(f"vt {pp[0]} {-pp[1]}\n")
 
             for obj_part, gg in enumerate(all_draws):
                 if len(gg) <= 0:

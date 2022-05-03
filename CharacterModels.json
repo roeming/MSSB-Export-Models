@@ -7,7 +7,25 @@
             "b2": 4,
             "size": 246968,
             "offset": 246378496,
-            "d4": 157096
+            "d4": 157096,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -16,7 +34,25 @@
             "b2": 4,
             "size": 274868,
             "offset": 246536192,
-            "d4": 176684
+            "d4": 176684,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -25,7 +61,25 @@
             "b2": 4,
             "size": 235168,
             "offset": 246714368,
-            "d4": 159444
+            "d4": 159444,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -34,7 +88,25 @@
             "b2": 4,
             "size": 257420,
             "offset": 246874112,
-            "d4": 166988
+            "d4": 166988,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -43,7 +115,25 @@
             "b2": 4,
             "size": 223556,
             "offset": 247042048,
-            "d4": 142836
+            "d4": 142836,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -52,7 +142,25 @@
             "b2": 4,
             "size": 236356,
             "offset": 247185408,
-            "d4": 157208
+            "d4": 157208,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -61,7 +169,25 @@
             "b2": 4,
             "size": 205028,
             "offset": 247343104,
-            "d4": 138796
+            "d4": 138796,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -70,7 +196,25 @@
             "b2": 4,
             "size": 198776,
             "offset": 247482368,
-            "d4": 122240
+            "d4": 122240,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -79,7 +223,25 @@
             "b2": 4,
             "size": 185284,
             "offset": 247605248,
-            "d4": 111596
+            "d4": 111596,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -88,7 +250,25 @@
             "b2": 4,
             "size": 217688,
             "offset": 247717888,
-            "d4": 145628
+            "d4": 145628,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -97,7 +277,25 @@
             "b2": 4,
             "size": 270032,
             "offset": 247865344,
-            "d4": 170884
+            "d4": 170884,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -106,7 +304,25 @@
             "b2": 4,
             "size": 267436,
             "offset": 248037376,
-            "d4": 184672
+            "d4": 184672,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -115,7 +331,25 @@
             "b2": 4,
             "size": 190856,
             "offset": 248223744,
-            "d4": 123068
+            "d4": 123068,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -124,7 +358,25 @@
             "b2": 4,
             "size": 196304,
             "offset": 248348672,
-            "d4": 115608
+            "d4": 115608,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -133,7 +385,25 @@
             "b2": 4,
             "size": 130856,
             "offset": 248465408,
-            "d4": 86016
+            "d4": 86016,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -142,7 +412,25 @@
             "b2": 4,
             "size": 208116,
             "offset": 248551424,
-            "d4": 128228
+            "d4": 128228,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -151,7 +439,25 @@
             "b2": 4,
             "size": 138996,
             "offset": 248680448,
-            "d4": 86292
+            "d4": 86292,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -160,7 +466,25 @@
             "b2": 4,
             "size": 231832,
             "offset": 248768512,
-            "d4": 145736
+            "d4": 145736,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -169,7 +493,25 @@
             "b2": 4,
             "size": 118328,
             "offset": 248915968,
-            "d4": 72496
+            "d4": 72496,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -178,7 +520,25 @@
             "b2": 4,
             "size": 208860,
             "offset": 248989696,
-            "d4": 135508
+            "d4": 135508,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -187,7 +547,25 @@
             "b2": 4,
             "size": 191780,
             "offset": 249126912,
-            "d4": 125260
+            "d4": 125260,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -196,7 +574,25 @@
             "b2": 4,
             "size": 201872,
             "offset": 249253888,
-            "d4": 129060
+            "d4": 129060,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -205,7 +601,25 @@
             "b2": 4,
             "size": 197488,
             "offset": 249384960,
-            "d4": 125808
+            "d4": 125808,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -214,7 +628,25 @@
             "b2": 4,
             "size": 197488,
             "offset": 249511936,
-            "d4": 125808
+            "d4": 125808,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -223,7 +655,25 @@
             "b2": 4,
             "size": 149184,
             "offset": 249638912,
-            "d4": 93560
+            "d4": 93560,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -232,7 +682,25 @@
             "b2": 4,
             "size": 148732,
             "offset": 249733120,
-            "d4": 93260
+            "d4": 93260,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -241,7 +709,25 @@
             "b2": 4,
             "size": 148732,
             "offset": 249827328,
-            "d4": 93304
+            "d4": 93304,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -250,7 +736,25 @@
             "b2": 4,
             "size": 205864,
             "offset": 249921536,
-            "d4": 127008
+            "d4": 127008,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -259,7 +763,25 @@
             "b2": 4,
             "size": 224472,
             "offset": 250050560,
-            "d4": 145448
+            "d4": 145448,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -268,7 +790,25 @@
             "b2": 4,
             "size": 169360,
             "offset": 250198016,
-            "d4": 104116
+            "d4": 104116,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -277,7 +817,25 @@
             "b2": 4,
             "size": 169360,
             "offset": 250302464,
-            "d4": 103424
+            "d4": 103424,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -286,7 +844,25 @@
             "b2": 4,
             "size": 169360,
             "offset": 250406912,
-            "d4": 103172
+            "d4": 103172,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -295,7 +871,25 @@
             "b2": 4,
             "size": 169360,
             "offset": 250511360,
-            "d4": 103184
+            "d4": 103184,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -304,7 +898,25 @@
             "b2": 4,
             "size": 193828,
             "offset": 250615808,
-            "d4": 123176
+            "d4": 123176,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -313,7 +925,25 @@
             "b2": 4,
             "size": 193824,
             "offset": 250740736,
-            "d4": 123136
+            "d4": 123136,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -322,7 +952,25 @@
             "b2": 4,
             "size": 193824,
             "offset": 250865664,
-            "d4": 123108
+            "d4": 123108,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -331,7 +979,25 @@
             "b2": 4,
             "size": 193824,
             "offset": 250990592,
-            "d4": 123408
+            "d4": 123408,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -340,7 +1006,25 @@
             "b2": 4,
             "size": 150040,
             "offset": 251115520,
-            "d4": 92828
+            "d4": 92828,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -349,7 +1033,25 @@
             "b2": 4,
             "size": 155256,
             "offset": 251209728,
-            "d4": 105112
+            "d4": 105112,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -358,7 +1060,25 @@
             "b2": 4,
             "size": 244028,
             "offset": 251316224,
-            "d4": 162460
+            "d4": 162460,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -367,7 +1087,25 @@
             "b2": 4,
             "size": 90904,
             "offset": 251480064,
-            "d4": 63416
+            "d4": 63416,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -376,7 +1114,25 @@
             "b2": 4,
             "size": 114460,
             "offset": 251543552,
-            "d4": 75604
+            "d4": 75604,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -385,7 +1141,25 @@
             "b2": 4,
             "size": 218216,
             "offset": 251619328,
-            "d4": 146660
+            "d4": 146660,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -394,7 +1168,25 @@
             "b2": 4,
             "size": 219104,
             "offset": 251766784,
-            "d4": 148864
+            "d4": 148864,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -403,7 +1195,25 @@
             "b2": 4,
             "size": 138360,
             "offset": 251916288,
-            "d4": 86016
+            "d4": 86016,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -412,7 +1222,25 @@
             "b2": 4,
             "size": 124948,
             "offset": 252002304,
-            "d4": 74832
+            "d4": 74832,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -421,7 +1249,25 @@
             "b2": 4,
             "size": 124948,
             "offset": 252078080,
-            "d4": 74884
+            "d4": 74884,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -430,7 +1276,25 @@
             "b2": 4,
             "size": 124948,
             "offset": 252153856,
-            "d4": 74856
+            "d4": 74856,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -439,7 +1303,25 @@
             "b2": 4,
             "size": 169800,
             "offset": 252229632,
-            "d4": 109556
+            "d4": 109556,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -448,7 +1330,25 @@
             "b2": 4,
             "size": 169704,
             "offset": 252340224,
-            "d4": 109432
+            "d4": 109432,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -457,7 +1357,25 @@
             "b2": 4,
             "size": 174344,
             "offset": 252450816,
-            "d4": 113340
+            "d4": 113340,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -466,7 +1384,25 @@
             "b2": 4,
             "size": 169704,
             "offset": 252565504,
-            "d4": 109388
+            "d4": 109388,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -475,7 +1411,25 @@
             "b2": 4,
             "size": 174056,
             "offset": 252676096,
-            "d4": 105164
+            "d4": 105164,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         },
         {
             "Input": "ZZZZ.dat",
@@ -484,7 +1438,25 @@
             "b2": 4,
             "size": 172264,
             "offset": 252782592,
-            "d4": 104476
+            "d4": 104476,
+            "Files": [
+                {
+                    "Type": "Texture",
+                    "Entry": 0
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 6
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 8
+                }
+            ]
         }
     ]
 }

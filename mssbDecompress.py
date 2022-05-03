@@ -1,20 +1,28 @@
 
 from genericpath import exists
+import os
+from posixpath import dirname
+
+from numpy import sign
 
 class MSSBByteReadBuffer:
     def __init__(self, file_name: str, offset: int) -> None:
         self.file_name = file_name
         self.offset = offset
         
-        self.file = open(self.file_name, "rb")
-        self.file.seek(self.offset)
+        file = open(self.file_name, "rb")
+        file.seek(self.offset)
+        self.file_bytes = file.read()
+        self.byte_offset = 0
 
         self.bits_in_buffer = 0
         self.buffer = 0
         self.allBytes = []
     
     def __read_new_byte__(self) ->  int:
-        b = self.file.read1(1)
+        b = int.to_bytes(self.file_bytes[self.byte_offset], 1, "big", signed=False)
+        self.byte_offset += 1
+
         self.allBytes.append(b)
         return int.from_bytes(b, "big", signed = False) 
 
@@ -66,7 +74,7 @@ class MSSBByteReadBuffer:
         return bit
 
     def close(self):
-        self.file.close()
+        del self.file_bytes
 
 class MSSBDecompressor:
 
@@ -155,21 +163,21 @@ def main():
         
         b1 = hex_if_possible(b_split[0])       
         b2 = hex_if_possible(b_split[1])
-    except:
+    except:   
         print("Failed to read compression constants.")
         return
 
     decompress(file_name, output_name, offset, size, b1, b2)
 
-def decompress(file_name:str, output_name:str, offset:int, size:int, b1:int, b2:int, skip_if_exists = True):
+def decompress(file_name:str, output_name:str, offset:int, size:int, b1:int, b2:int, skip_if_exists = True) -> bool:
     if skip_if_exists and exists(output_name):
         print("Decompressed file already exists, skipping...")
-        return
+        return True
     s = MSSBDecompressor(file_name, offset, size, b1, b2)
     try:
         a = s.decompress()
         if a == None:
-            return
+            return False
         else:
             print("Finished decompressing file, writing now.")
             with open(output_name, "wb") as f:
@@ -178,7 +186,7 @@ def decompress(file_name:str, output_name:str, offset:int, size:int, b1:int, b2:
 
         print("Completed decompressing")
         return True
-    except BaseException as err:
+    except IndexError as err:
         print(f"Failed Decompressing, {err=}")
         return False
     
