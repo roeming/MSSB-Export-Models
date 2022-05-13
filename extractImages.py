@@ -5,7 +5,7 @@ try:
     from PIL import Image
 except:
     print("Make sure you have pillow installed. If you don't please run")
-    print("'python -m pip install pillow'")
+    print("'python -m pip install-r requirements.txt'")
     exit()
 
 image_formats = {
