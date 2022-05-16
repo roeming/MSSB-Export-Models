@@ -184,9 +184,6 @@ def decompress(file_name:str, output_name:str, offset:int, size:int, b1:int, b2:
 
     print("Completed decompressing")
     return True
-#    except IndexError as err:
-#        print(f"Failed Decompressing, {err=}")
-#        return False
     
 if __name__ == "__main__":
     main()

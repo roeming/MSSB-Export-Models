@@ -3,6 +3,8 @@ import os
 from posixpath import dirname
 import struct
 
+from tools.conversions import *
+
 def main():
     file_name = input("Input file name: ")
     part_of_file = int(input("Input part of file: "))
@@ -308,19 +310,6 @@ def parse_indices(b: bytes, **kwargs) -> list:
         faces_to_return.extend(new_tris)
     return faces_to_return
 
-
-
-def float_from_fixedpoint(a:int, shift:int):
-    return a / (1 << shift)
-
-def int_from_bytes(b:bytes, signed = False):
-    if type(b) == int:
-        return b
-    return int.from_bytes(b, "big", signed=signed)
-
-def ints_from_bytes(*b, signed = False):
-    return [int_from_bytes(s) for s in b]
-
 class GeoPaletteHeader:
     size_of_struct = 20
 
@@ -341,7 +330,15 @@ class GeoPaletteHeader:
             self.offsetToUserDefinedData += offset
 
     def __str__(self) -> str:
-        return f"=={self.__class__.__name__}==\nVersion Number: {self.versionNumber}\nUser Defined Data Size: {self.userDefinedDataSize}\npDefined Data: {hex(self.offsetToUserDefinedData)}\nNumber Of Geometry Descriptors: {self.numberOfGeometryDescriptors}\npGeometry Descriptor Array: {hex(self.offsetToGeometryDescriptorArray)}"
+        t = ""
+        t += f"=={self.__class__.__name__}==\n"
+        t += f"Version Number: {self.versionNumber}\n"
+        t += f"User Defined Data Size: {self.userDefinedDataSize}\n"
+        t += f"pDefined Data: {hex(self.offsetToUserDefinedData)}\n"
+        t += f"Number Of Geometry Descriptors: {self.numberOfGeometryDescriptors}\n"
+        t += f"pGeometry Descriptor Array: {hex(self.offsetToGeometryDescriptorArray)}"
+
+        return t
 
 class GeoDescriptor:
     size_of_struct = 8
@@ -364,7 +361,13 @@ class GeoDescriptor:
         self.name = name
     
     def __str__(self) -> str:
-        return f"=={self.__class__.__name__}==\nName: {self.name}\npDisplay Object: {hex(self.offsetToDisplayObject)}\npName: {hex(self.offsetToName)}"
+        t = ""
+        t += f"=={self.__class__.__name__}==\n"
+        t += f"Name: {self.name}\n"
+        t += f"pDisplay Object: {hex(self.offsetToDisplayObject)}\n"
+        t += f"pName: {hex(self.offsetToName)}"
+        
+        return t
 
 class DisplayObjectLayout:
     size_of_struct = 0x18
@@ -396,7 +399,14 @@ class DisplayObjectLayout:
             self.OffsetToDisplayData += offset
     
     def __str__(self) -> str:
-        return f"=={self.__class__.__name__}==\npPosition Data: {hex(self.OffsetToPositionData)}\npColor Data: {hex(self.OffsetToColorData)}\npTexture Data: {hex(self.OffsetToTextureData)}\npLighting Data: {hex(self.OffsetToLightingData)}\npDisplay Data: {hex(self.OffsetToDisplayData)}"
+        t = ""
+        t += f"=={self.__class__.__name__}==\n"
+        t += f"pPosition Data: {hex(self.OffsetToPositionData)}\n"
+        t += f"pColor Data: {hex(self.OffsetToColorData)}\n"
+        t += f"pTexture Data: {hex(self.OffsetToTextureData)}\n"
+        t += f"pLighting Data: {hex(self.OffsetToLightingData)}\n"
+        t += f"pDisplay Data: {hex(self.OffsetToDisplayData)}"
+        return t
 
 class DisplayObjectPositionHeader:
     size_of_struct = 0x8
@@ -436,7 +446,14 @@ class DisplayObjectPositionHeader:
             self.offsetToPositionArray += offset
     
     def __str__(self) -> str:
-        return f"=={self.__class__.__name__}==\npPositions: {hex(self.offsetToPositionArray)}\nPosition Count: {hex(self.numberOfPositions)}\nQuantize Info: {hex(self.quantizeInfo)}\nComponent Count: {self.numberOfComponents}"
+        t = ""
+        t += f"=={self.__class__.__name__}==\n"
+        t += f"pPositions: {hex(self.offsetToPositionArray)}\n"
+        t += f"Position Count: {hex(self.numberOfPositions)}\n"
+        t += f"Quantize Info: {hex(self.quantizeInfo)}\n"
+        t += f"Component Count: {self.numberOfComponents}"
+
+        return t
 
 
 class DisplayObjectColorHeader:
@@ -468,7 +485,14 @@ class DisplayObjectColorHeader:
             self.offsetToColorArray += offset
 
     def __str__(self) -> str:
-        return f"=={self.__class__.__name__}==\npColors: {hex(self.offsetToColorArray)}\nColor Count: {self.numberOfColors}\nFormat Info: {hex(self.quantizeInfo)}\nComponent Count: {self.numberOfComponents}"
+        t = ""
+        t += f"=={self.__class__.__name__}==\n"
+        t += f"pColors: {hex(self.offsetToColorArray)}\n"
+        t += f"Color Count: {self.numberOfColors}\n"
+        t += f"Format Info: {hex(self.quantizeInfo)}\n"
+        t += f"Component Count: {self.numberOfComponents}"
+
+        return t
 
 class DisplayObjectTextureHeader:
     size_of_struct = 0x10
@@ -515,7 +539,16 @@ class DisplayObjectTextureHeader:
             self.offsetToTexturePaletteFileName += offset
 
     def __str__(self) -> str:
-        return f"=={self.__class__.__name__}==\nName: {self.name}\npName: {hex(self.offsetToTexturePaletteFileName)}\npTexture Coords: {hex(self.offsetToTextureCoordinateArray)}\nCoord Count: {self.numberOfCoordinates}\nFormat Info: {hex(self.quantizeInfo)}\nComponent Count: {self.numberOfComponents}"
+        t = ""
+        t += f"=={self.__class__.__name__}==\n"
+        t += f"Name: {self.name}\n"
+        t += f"pName: {hex(self.offsetToTexturePaletteFileName)}\n"
+        t += f"pTexture Coords: {hex(self.offsetToTextureCoordinateArray)}\n"
+        t += f"Coord Count: {self.numberOfCoordinates}\n"
+        t += f"Format Info: {hex(self.quantizeInfo)}\n"
+        t += f"Component Count: {self.numberOfComponents}"
+
+        return t
 
 
 class DisplayObjectLightingHeader:
@@ -552,14 +585,21 @@ class DisplayObjectLightingHeader:
         self.numberOfComponents = i[3]
         ba = bytearray(b[8:12])
         ba.reverse()
-        self.ambientBrightness = struct.unpack("f", ba)[0]
+        self.ambientBrightness = float_from_bytes(ba)
 
     def add_offset(self, offset:int)->None:
         if self.offsetToNormalArray != 0:
             self.offsetToNormalArray += offset
 
     def __str__(self) -> str: 
-        return f"=={self.__class__.__name__}==\npNormals: {hex(self.offsetToNormalArray)}\nNormal Count: {self.numberOfNormals}\nFormat Info: {hex(self.quantizeInfo)}\nComponent Count: {self.numberOfComponents}\nAmbient Brightness: {self.ambientBrightness}"
+        t = ""
+        t += f"=={self.__class__.__name__}==\n"
+        t += f"pNormals: {hex(self.offsetToNormalArray)}\n"
+        t += f"Normal Count: {self.numberOfNormals}\n"
+        t += f"Format Info: {hex(self.quantizeInfo)}\n"
+        t += f"Component Count: {self.numberOfComponents}\n"
+        t += f"Ambient Brightness: {self.ambientBrightness}"
+        return t
 
 
 class DisplayObjectDisplayHeader:
@@ -579,7 +619,12 @@ class DisplayObjectDisplayHeader:
             self.offsetToDisplayStateList += offset
     
     def __str__(self) -> str: 
-        return f"=={self.__class__.__name__}==\npPrimitive Bank: {hex(self.offsetToPrimitiveBank)}\npDisplay States: {hex(self.offsetToDisplayStateList)}\nDisplay State Count: {self.numberOfDisplayStateEntries}"
+        t= ""
+        t += f"=={self.__class__.__name__}==\n"
+        t += f"pPrimitive Bank: {hex(self.offsetToPrimitiveBank)}\n"
+        t += f"pDisplay States: {hex(self.offsetToDisplayStateList)}\n"
+        t += f"Display State Count: {self.numberOfDisplayStateEntries}"
+        return t
 
         
 class DisplayObjectDisplayState:
@@ -597,7 +642,14 @@ class DisplayObjectDisplayState:
             self.offsetToPrimitiveList += offset
     
     def __str__(self) -> str: 
-        return f"=={self.__class__.__name__}==\nState ID: {self.stateID}\nSetting: {hex(self.setting)}\npPrimitive List: {hex(self.offsetToPrimitiveList)}\nPrimitive Byte Count: {self.byteLengthPrimitiveList}"
+        t = ""
+        t += f"=={self.__class__.__name__}==\n"
+        t += f"State ID: {self.stateID}\n"
+        t += f"Setting: {hex(self.setting)}\n"
+        t += f"pPrimitive List: {hex(self.offsetToPrimitiveList)}\n"
+        t += f"Primitive Byte Count: {self.byteLengthPrimitiveList}"
+        
+        return t
 
 if __name__ == "__main__":
     main()

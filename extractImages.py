@@ -1,11 +1,14 @@
+from dataclasses import dataclass
 from genericpath import exists
 import os
 from os.path import dirname, join
+from tkinter import W
 try:
     from PIL import Image
 except:
     print("Make sure you have pillow installed. If you don't please run")
     print("'python -m pip install-r requirements.txt'")
+    input("Press Enter To continue...")
     exit()
 
 image_formats = {
@@ -52,53 +55,53 @@ def export_images(input_file:str, output_dir:str, file_part:int = 0, file_header
         for i in range(image_count):
             f.seek(file_offset + 4 + 0x20*i)
             header = texture_header_from_bytes(f.read(0x20))
-            print_header(header)
+            print(header)
             try:
-                assert(header["format"] in image_formats)
-                assert(header["width"] % 4 == 0)
-                assert(header["height"] % 4 == 0)
+                assert(header.format in image_formats)
+                assert(header.width % 4 == 0)
+                assert(header.height % 4 == 0)
             except:
                 print(f"{i}: File header failed check")
                 continue
             print(f"{i}: File header succeeded check")
 
-            f.seek(header["address"] + file_offset)
+            f.seek(header.address + file_offset)
 
-            width, height = (header["width"], header["height"])
+            width, height = (header.width, header.height)
 
             image = Image.new("RGBA", (width, height))
-            if header["format"] == 0x1: #I4
-                print_header(header)
+            if header.format == 0x1: #I4
+                print(header)
                 assert(False)
-            elif header["format"] == 0x2: #I8
-                print_header(header)
+            elif header.format == 0x2: #I8
+                print(header)
                 assert(False)
-            elif header["format"] == 0x3: #IA4
-                print_header(header)
+            elif header.format == 0x3: #IA4
+                print(header)
                 assert(False)
-            elif header["format"] == 0x4: # RGB565
-                print_header(header)
+            elif header.format == 0x4: # RGB565
+                print(header)
                 assert(False)
-            elif header["format"] == 0x5: # RGB565
-                print_header(header)
+            elif header.format == 0x5: # RGB565
+                print(header)
                 assert(False)
-            elif header["format"] == 0x6: # RGBA32
-                print_header(header)
+            elif header.format == 0x6: # RGBA32
+                print(header)
                 assert(False)
-            elif header["format"] == 0x8: # C4
-                header["palette"] = header["palette"] + file_offset 
+            elif header.format == 0x8: # C4
+                header.palette = header.palette + file_offset 
 
                 blocks_to_read = (width//4) * (height//4) * 8
                 image_data = f.read(blocks_to_read)
 
-                f.seek(header["palette"])                
+                f.seek(header.palette)                
                 byt = f.read(0x20)
                 palette = [int_from_bytes(byt[i*2:i*2+2]) for i in range(0x10)]
-                if header["paletteFormat"] == 0: # IA8
+                if header.palette_format == 0: # IA8
                     palette = [IA8_to_tuple(x) for x in palette]
-                elif header["paletteFormat"] == 1: # RGB565
+                elif header.palette_format == 1: # RGB565
                     palette = [R5G6B5_alpha_to_tuple(x) for x in palette]
-                elif header["paletteFormat"] == 2: # RGB5A3
+                elif header.palette_format == 2: # RGB5A3
                     palette = [RGB5A3_to_tuple(x) for x in palette]
                 else:
                     assert(False)
@@ -108,15 +111,15 @@ def export_images(input_file:str, output_dir:str, file_part:int = 0, file_header
                         p = get_pixel_c4(image_data, s, t, width, palette)
                         image.putpixel((s,t), p)
 
-            elif header["format"] == 0x9: # C8
-                print_header(header)
+            elif header.format == 0x9: # C8
+                print(header)
                 assert(False)
 
-            elif header["format"] == 0xa: # C14X2
-                print_header(header)
+            elif header.format == 0xa: # C14X2
+                print(header)
                 assert(False)
 
-            elif header["format"] == 0xe: # CMPR
+            elif header.format == 0xe: # CMPR
                 blocks_to_read = (width//4) * (height//4) * 8
                 image_data = f.read(blocks_to_read)
                 for t in range(height):
@@ -170,16 +173,34 @@ def RGB5A3_to_tuple(a:int):
     else:
         return ((a >> 10) & 0x1f, (a >> 5) & 0x1f, a & 0x1f, 255)
 
-def texture_header_from_bytes(a:bytes) -> dict[str: str]:
-    ret = {}
-    ret["address"] = int_from_bytes(a[:4])
-    ret["height"] = int_from_bytes(a[8:10])
-    ret["width"] = int_from_bytes(a[10:12])
-    ret["format"] = int_from_bytes(a[20:24])
-    ret["palette"] = int_from_bytes(a[4:8])
-    ret["paletteFormat"] = a[0x1a]
+@dataclass
+class TPLTextureHeader:
+    address:int
+    height:int
+    width:int
+    format:int
+    palette:int
+    palette_format:int
+
+    def __str__(self) -> str:
+        t = ""
+        format = image_formats.get(self.format, hex(self.format))
+        t += f"format: {format}\n"
+        t += f"width: {self.width}\n"  
+        t += f"height: {self.height}"
+        return t
+
+def texture_header_from_bytes(a:bytes) -> TPLTextureHeader:
+    ret = TPLTextureHeader(
+        address=int_from_bytes(a[:4]),
+        height=int_from_bytes(a[8:10]),
+        width=int_from_bytes(a[10:12]),
+        format=int_from_bytes(a[20:24]),
+        palette=int_from_bytes(a[4:8]),
+        palette_format=a[0x1a]
+    )
     return ret
-    
+
 def dxt_blend(v1, v2):
     return ((v1 * 3 + v2 * 5) >> 3)
 
@@ -244,14 +265,6 @@ def get_pixel_c4(src:bytes, s:int, t:int, width:int, palette):
     # print(val)
     # val = (val << 4) & val
     return palette[val]
-
-def print_header(header):
-    format = image_formats.get(header["format"], hex(header["format"]))
-    width = header["width"]
-    height = header["height"]
-    print(f"format: {format}")
-    print(f"width: {width}")
-    print(f"height: {height}")
 
 if __name__ == "__main__":
     main()

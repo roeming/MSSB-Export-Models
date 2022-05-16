@@ -3,7 +3,8 @@ MSSB Character Model Extractor v 1.0
 This program will extract all character models from Mario Superstar Baseball
 
 Please extract your ZZZZ.dat and put it in this folder.
-Make sure you have python installed, you can double click RunMe.bat
+Make sure you have python installed, you can then double click InstallExtensions.bat to install the needed python libraries
+You can then double click RunMe.bat
 Alternatively, you can run `python main.py`
 
 Select a number from the given list to extract that character, or press enter to extract all characters.

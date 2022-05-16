@@ -4,6 +4,8 @@ import os
 import sys
 import hashlib
 
+from tools.conversions import *
+
 import extractImages
 import extractModel
 import mssbDecompress
@@ -36,7 +38,7 @@ def main():
 
     if sha1.hexdigest() != ZZZZ_hash:
         print(f"Your {ZZZZ_file_name} doesn't match the known hash. Please re-export your file, and try again.")
-        print(f"\nAlso, please verify the dump of your rom.\nYou can do this by opening Dolphin, right clicking on your rom -> Properties -> Verify -> Verify Integrity.")
+        print(f"Also, please verify the dump of your rom.\nYou can do this by opening Dolphin, right clicking on your rom -> Properties -> Verify -> Verify Integrity.")
         err = True
 
     if err:
@@ -189,9 +191,6 @@ def brute_force_decompress(entries, output_folder):
             print(f)
     else:
         print("Success")
-
-def int_from_bytes(b:bytes)->int:
-    return int.from_bytes(b, "big", signed=False)
 
 if __name__ == "__main__":
     main()
