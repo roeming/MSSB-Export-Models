@@ -1,9 +1,10 @@
 from genericpath import exists
 import os
 from posixpath import dirname
-import struct
 
+from tools.graphics import *
 from tools.conversions import *
+from tools.file_helper import get_parts_of_file
 
 def main():
     file_name = input("Input file name: ")
@@ -20,7 +21,7 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
     with open(file_name, "rb") as f:
         file_bytes = f.read()
 
-    parts_of_file = []
+    parts_of_file = get_parts_of_file(file_name)
     offset = 0
     while True:
         p = int_from_bytes(file_bytes[offset:offset+4])
@@ -31,12 +32,10 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
     del p
 
     base_gpl = parts_of_file[part_of_file]
-    geo_header = GeoPaletteHeader(file_bytes[base_gpl:base_gpl + GeoPaletteHeader.size_of_struct])
+    geo_header = GeoPaletteHeader(file_bytes[base_gpl:][:GeoPaletteHeader.SIZE_OF_STRUCT])
     geo_header.add_offset(base_gpl)
-    # print(geo_header)
-    # print()
     
-    descriptors = [GeoDescriptor(file_bytes[geo_header.offsetToGeometryDescriptorArray + i * GeoDescriptor.size_of_struct:geo_header.offsetToGeometryDescriptorArray + (i+1) * GeoDescriptor.size_of_struct:]) for i in range(geo_header.numberOfGeometryDescriptors)]
+    descriptors = [GeoDescriptor(file_bytes[geo_header.offsetToGeometryDescriptorArray + i * GeoDescriptor.SIZE_OF_STRUCT:][:GeoDescriptor.SIZE_OF_STRUCT]) for i in range(geo_header.numberOfGeometryDescriptors)]
     
     for d in descriptors:
         d.add_offset(base_gpl)
@@ -46,31 +45,33 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
             n += chr(file_bytes[n_offset])
             n_offset += 1
         d.name = n
-        # print(d)
-    # print()
+
     
     for d in descriptors:
         dol_offset = d.offsetToDisplayObject
-        dol = DisplayObjectLayout(file_bytes[dol_offset : dol_offset + DisplayObjectLayout.size_of_struct])
+        dol = DisplayObjectLayout(file_bytes[dol_offset:][:DisplayObjectLayout.SIZE_OF_STRUCT])
         dol.add_offset(dol_offset)
-        # print(dol)
-        # print()
 
-        dop = DisplayObjectPositionHeader(file_bytes[dol.OffsetToPositionData:dol.OffsetToPositionData+DisplayObjectPositionHeader.size_of_struct])
+        dop = DisplayObjectPositionHeader(file_bytes[dol.OffsetToPositionData:][:DisplayObjectPositionHeader.SIZE_OF_STRUCT])
         dop.add_offset(dol_offset)
-        # print(dop)
-        poss = parse_array_values(file_bytes[dop.offsetToPositionArray : dop.offsetToPositionArray + (dop.numberOfPositions * (dop.componentSize * dop.numberOfComponents))], 3, dop.componentSize, dop.componentSize*dop.numberOfComponents, dop.componentShift, dop.componentSigned)
-        # print()
 
-        doc = DisplayObjectColorHeader(file_bytes[dol.OffsetToColorData:dol.OffsetToColorData+DisplayObjectColorHeader.size_of_struct])
+        poss = parse_array_values(
+            file_bytes[dop.offsetToPositionArray :][:(dop.numberOfPositions * (dop.componentSize * dop.numberOfComponents))],
+            3,
+            dop.componentSize, 
+            dop.componentSize * dop.numberOfComponents,
+            dop.componentShift,
+            dop.componentSigned,
+            PositionVector
+            )
+
+        doc = DisplayObjectColorHeader(file_bytes[dol.OffsetToColorData:][:DisplayObjectColorHeader.SIZE_OF_STRUCT])
         doc.add_offset(dol_offset)
-        # print(doc)
-        # print()
 
         dot = []
         tex_coords = []
         for i in range(dol.numberOfTextures):
-            dd = DisplayObjectTextureHeader(file_bytes[dol.OffsetToTextureData + i * DisplayObjectTextureHeader.size_of_struct: dol.OffsetToTextureData + (i + 1) * DisplayObjectTextureHeader.size_of_struct])
+            dd = DisplayObjectTextureHeader(file_bytes[dol.OffsetToTextureData + i * DisplayObjectTextureHeader.SIZE_OF_STRUCT:][: DisplayObjectTextureHeader.SIZE_OF_STRUCT])
             dd.add_offset(dol_offset)
             n_offset = dd.offsetToTexturePaletteFileName
             n = ""
@@ -80,26 +81,38 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
             dd.name = n
 
             dot.append(dd)
-            # print(dot[i])
 
             if i == 0:
-                tex_coords = parse_array_values(file_bytes[dd.offsetToTextureCoordinateArray : dd.offsetToTextureCoordinateArray + (dd.numberOfCoordinates * (dd.componentSize * dd.numberOfComponents))], 2, dd.componentSize, dd.componentSize*dd.numberOfComponents, dd.componentShift, dd.componentSigned)
-        # print()
+                tex_coords = parse_array_values(
+                    file_bytes[dd.offsetToTextureCoordinateArray:][:(dd.numberOfCoordinates * (dd.componentSize * dd.numberOfComponents))],
+                    2,
+                    dd.componentSize, 
+                    dd.componentSize * dd.numberOfComponents,
+                    dd.componentShift, 
+                    dd.componentSigned,
+                    TextureVector
+                    )
 
-        doli = DisplayObjectLightingHeader(file_bytes[dol.OffsetToLightingData:dol.OffsetToLightingData+DisplayObjectLightingHeader.size_of_struct])
+        doli = DisplayObjectLightingHeader(file_bytes[dol.OffsetToLightingData:][:DisplayObjectLightingHeader.SIZE_OF_STRUCT])
         doli.add_offset(dol_offset)
-        # print(doli)
-        norms = parse_array_values(file_bytes[doli.offsetToNormalArray : doli.offsetToNormalArray + (doli.numberOfNormals * (doli.componentSize * doli.numberOfComponents))], 3, doli.componentSize, doli.componentSize*doli.numberOfComponents, doli.componentShift, doli.componentSigned)
-        # print()
 
-        dod = DisplayObjectDisplayHeader(file_bytes[dol.OffsetToDisplayData:dol.OffsetToDisplayData+DisplayObjectDisplayHeader.size_of_struct])
+        norms = parse_array_values(
+            file_bytes[doli.offsetToNormalArray:][:(doli.numberOfNormals * (doli.componentSize * doli.numberOfComponents))],
+            3,
+            doli.componentSize, 
+            doli.componentSize * doli.numberOfComponents, 
+            doli.componentShift, 
+            doli.componentSigned,
+            NormalVector
+            )
+
+        dod = DisplayObjectDisplayHeader(file_bytes[dol.OffsetToDisplayData:][:DisplayObjectDisplayHeader.SIZE_OF_STRUCT])
         dod.add_offset(dol_offset)
-        # print(dod)
-        # print()
 
-        dods = [DisplayObjectDisplayState(file_bytes[dod.offsetToDisplayStateList + i * DisplayObjectDisplayState.size_of_struct: dod.offsetToDisplayStateList + (i + 1) * DisplayObjectDisplayState.size_of_struct]) for i in range(dod.numberOfDisplayStateEntries)]
+        dods = [DisplayObjectDisplayState(file_bytes[dod.offsetToDisplayStateList + i * DisplayObjectDisplayState.SIZE_OF_STRUCT:][:DisplayObjectDisplayState.SIZE_OF_STRUCT]) for i in range(dod.numberOfDisplayStateEntries)]
         all_draws = []
         print(d)
+
         texture_index = None
         for dod_i, dod in enumerate(dods):
             dod.add_offset(dol_offset)
@@ -135,98 +148,97 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
                 print(f"Unknown Display Call: {dod.stateID}")
                 assert(False)
 
-            these_tris = []
             if(dod.offsetToPrimitiveList != 0):
-                tris = parse_indices(file_bytes[dod.offsetToPrimitiveList : dod.offsetToPrimitiveList + dod.byteLengthPrimitiveList], **comps)
-                these_tris.extend(tris)
-                all_draws.append((these_tris, texture_index))
+                tris = parse_indices(file_bytes[dod.offsetToPrimitiveList:][:dod.byteLengthPrimitiveList], **comps)
+                # these_tris.extend(tris)
+                all_draws.append((tris, texture_index))
 
 
         # Write to Obj
         mtl_file = "mtl.mtl"
-        glob_mtl_file = os.path.join(output_directory, mtl_file)
         
         with open(os.path.join(output_directory, d.name + ".obj"), "w") as f:
-            if(exists(glob_mtl_file)):
-                f.write(f"mtllib {mtl_file}\n")
-            for pp in poss:
-                f.write(f"v {pp[0]} {-pp[1]} {-pp[2]}\n")
-            for pp in norms:
-                f.write(f"vn {pp[0]} {-pp[1]} {-pp[2]}\n")
-            for pp in tex_coords:
-                f.write(f"vt {pp[0]} {-pp[1]}\n")
+            coord_group = OBJGroup(
+                positions=poss,
+                textures=tex_coords,
+                normals=norms,
+                faces=[]
+                )
 
-            for obj_part, gg in enumerate(all_draws):
-                if len(gg) <= 0:
-                    continue
-                f.write(f"g group{obj_part}\n")
-                if gg[1] is not None:
-                    f.write(f"usemtl mssbMtl.{gg[1]}\n")
-                for g in gg[0]:
-                    f.write("f")
-                    # print(pp)
-                    for ppp in g:
-                        # print(ppp)
-                        f.write(" ")
-                        f.write(str(ppp[0]+1))
-                        f.write("/")
-                        if ppp[2] is not None:
-                            f.write(str(ppp[2]+1))
-                        f.write("/")
-                        if ppp[1] is not None:
-                            f.write(str(ppp[1]+1))
-                        # f.write("/".join([str(x) for x in ppp]))
-                    f.write("\n")
-        # exit()
+            draw_groups = [OBJGroup(positions=[], textures=[], normals=[], faces=gg[0], mtl=f"mssbMtl.{gg[1]}" if gg[1] != None else None, name=f"group{obj_part}") for obj_part, gg in enumerate(all_draws)]
+            
+            draw_groups = [coord_group] + draw_groups
 
-    # print()
+            obj_file = OBJFile(
+                groups=draw_groups, 
+                mtl_file=mtl_file
+                )
 
-def parse_array_values(b:bytes, component_count:int, component_width:int, struct_size:int, fixed_point:int, signed:bool)->list:
+            if(not obj_file.assert_valid()):
+                debug = 0
+
+            f.write(str(obj_file))
+
+def parse_array_values(b:bytes, component_count:int, component_width:int, struct_size:int, fixed_point:int, signed:bool, cls=None)->list:
     to_return = []
     offset = 0
     while offset < len(b):
         c = []
-        these_b = b[offset:offset + struct_size]
+        these_b = b[offset:][:struct_size]
         for i in range(component_count):
-            ii = int_from_bytes(these_b[i*component_width:(i+1)*component_width], signed=signed)
+            ii = int_from_bytes(these_b[i*component_width:][:component_width], signed=signed)
             f = float_from_fixedpoint(ii, fixed_point)
             c.append(f)
         to_return.append(c)        
         offset += struct_size
-    return to_return
+    if cls == None:
+        return to_return
+    else:
+        return [cls(*x) for x in to_return]
 
-def parse_quads(l: list) -> list:
+def parse_quads(l: list, cls=None) -> list:
     to_return = []
     assert(len(l) % 4 == 0)
     for i in range(len(l) // 4):
         ii = i*4
         to_return.append((l[ii+0], l[ii+1], l[ii+2]))
         to_return.append((l[ii+2], l[ii+3], l[ii+0]))
-    return to_return
+    if cls == None:
+        return to_return
+    else:
+        return [cls(*x) for x in to_return]
 
-def parse_triangles(l: list) -> list:
+def parse_triangles(l: list, cls=None) -> list:
     to_return = []
     assert(len(l) % 3 == 0)
     for i in range(len(l) // 3):
         ii = i*3
         to_return.append((l[ii+0], l[ii+1], l[ii+2]))
-    return to_return
+    if cls == None:
+        return to_return
+    else:
+        return [cls(*x) for x in to_return]
 
-def parse_fan(l: list) -> list:
+def parse_fan(l: list, cls=None) -> list:
     to_return = []
     for i in range(len(l) - 2):
         to_return.append((l[0], l[i+1], l[i+2]))
-    return to_return
+    if cls == None:
+        return to_return
+    else:
+        return [cls(*x) for x in to_return]
 
-def parse_strip(l: list) -> list:
+def parse_strip(l: list, cls=None) -> list:
     to_return = []
     for i in range(len(l) - 2):
         if i%2 == 0:
             to_return.append((l[i], l[i+1], l[i+2]))
         else:
             to_return.append((l[i+2], l[i+1], l[i]))
-    return to_return
-
+    if cls == None:
+        return to_return
+    else:
+        return [cls(*x) for x in to_return]
 
 def parse_indices(b: bytes, **kwargs) -> list:
     vector_size = kwargs["vector_size"]
@@ -255,28 +267,31 @@ def parse_indices(b: bytes, **kwargs) -> list:
         shifted_command = command >> 3
         if shifted_command in [0x10, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17]:
             assert(command & 0x7 == 0)
-            count = int_from_bytes(b[offset:offset+2])
+            count = int_from_bytes(b[offset:][:2])
             offset += 2
             for i in range(count):
-                v = b[offset: offset + vector_size]
+                v = b[offset:][:vector_size]
                 vertex_parts = []
                 if pos_size > 0:
-                    pos = int_from_bytes(v[pos_offset:pos_offset + pos_size])
-                    vertex_parts.append(pos)
+                    pos = int_from_bytes(v[pos_offset:][:pos_size])
+                else:
+                    pos = None
                 
                 if norm_size > 0:
-                    norm = int_from_bytes(v[norm_offset:norm_offset+norm_size])
-                    vertex_parts.append(norm)
+                    norm = int_from_bytes(v[norm_offset:][:norm_size])
                 else:
-                    vertex_parts.append(None)
+                    norm = None
                 
                 if uv_size > 0:
-                    uv = int_from_bytes(v[uv_offset:uv_offset+uv_size])
-                    vertex_parts.append(uv)
+                    uv = int_from_bytes(v[uv_offset:][:uv_size])
                 else:
-                    vertex_parts.append(None)
+                    uv = None
 
-                new_tris.append(vertex_parts)
+                new_tris.append(OBJIndices(
+                    position_coordinate=OBJIndex(pos),
+                    normal_coordinate=OBJIndex(norm),
+                    texture_coordinate=OBJIndex(uv)
+                ))
                 offset += vector_size
         else:
             print(f"Unrecognized command: {hex(command)}")
@@ -308,348 +323,8 @@ def parse_indices(b: bytes, **kwargs) -> list:
             assert(False)
 
         faces_to_return.extend(new_tris)
-    return faces_to_return
-
-class GeoPaletteHeader:
-    size_of_struct = 20
-
-    def __init__(self, b:bytes) -> None:
-        assert(len(b) == self.size_of_struct)
-        ints = ints_from_bytes(b[0:4], b[4:8], b[8:12], b[12:16], b[16:20])
-        self.versionNumber = ints[0]
-        self.userDefinedDataSize = ints[1]
-        self.offsetToUserDefinedData = ints[2]
-        self.numberOfGeometryDescriptors = ints[3]
-        self.offsetToGeometryDescriptorArray = ints[4]
-
-    def add_offset(self, offset:int):
-        if self.offsetToGeometryDescriptorArray != 0 :
-            self.offsetToGeometryDescriptorArray += offset
-
-        if self.offsetToUserDefinedData != 0:
-            self.offsetToUserDefinedData += offset
-
-    def __str__(self) -> str:
-        t = ""
-        t += f"=={self.__class__.__name__}==\n"
-        t += f"Version Number: {self.versionNumber}\n"
-        t += f"User Defined Data Size: {self.userDefinedDataSize}\n"
-        t += f"pDefined Data: {hex(self.offsetToUserDefinedData)}\n"
-        t += f"Number Of Geometry Descriptors: {self.numberOfGeometryDescriptors}\n"
-        t += f"pGeometry Descriptor Array: {hex(self.offsetToGeometryDescriptorArray)}"
-
-        return t
-
-class GeoDescriptor:
-    size_of_struct = 8
-
-    def __init__(self, b:bytes) -> None:
-        assert(len(b) == self.size_of_struct)
-        i = ints_from_bytes(b[0:4], b[4:8])
-        self.offsetToDisplayObject = i[0]
-        self.offsetToName = i[1]
-        self.name = None
-
-    def add_offset(self, offset:int):
-        if self.offsetToDisplayObject != 0:
-            self.offsetToDisplayObject += offset
     
-        if self.offsetToName != 0:
-            self.offsetToName += offset
-    
-    def set_name(self, name:str):
-        self.name = name
-    
-    def __str__(self) -> str:
-        t = ""
-        t += f"=={self.__class__.__name__}==\n"
-        t += f"Name: {self.name}\n"
-        t += f"pDisplay Object: {hex(self.offsetToDisplayObject)}\n"
-        t += f"pName: {hex(self.offsetToName)}"
-        
-        return t
-
-class DisplayObjectLayout:
-    size_of_struct = 0x18
-
-    def __init__(self, b:bytes) -> None:
-        assert(len(b) == self.size_of_struct)
-        i = ints_from_bytes(b[0:4], b[4:8], b[8:12], b[12:16], b[16:20], b[20])
-        self.OffsetToPositionData = i[0]
-        self.OffsetToColorData = i[1]
-        self.OffsetToTextureData = i[2]
-        self.OffsetToLightingData = i[3]
-        self.OffsetToDisplayData = i[4]
-        self.numberOfTextures = i[5]
-        
-    def add_offset(self, offset:int) -> None:
-        if self.OffsetToPositionData != 0:
-            self.OffsetToPositionData += offset
-
-        if self.OffsetToColorData != 0:
-            self.OffsetToColorData += offset
-        
-        if self.OffsetToTextureData != 0:
-            self.OffsetToTextureData += offset
-
-        if self.OffsetToLightingData != 0:
-            self.OffsetToLightingData += offset
-
-        if self.OffsetToDisplayData != 0:
-            self.OffsetToDisplayData += offset
-    
-    def __str__(self) -> str:
-        t = ""
-        t += f"=={self.__class__.__name__}==\n"
-        t += f"pPosition Data: {hex(self.OffsetToPositionData)}\n"
-        t += f"pColor Data: {hex(self.OffsetToColorData)}\n"
-        t += f"pTexture Data: {hex(self.OffsetToTextureData)}\n"
-        t += f"pLighting Data: {hex(self.OffsetToLightingData)}\n"
-        t += f"pDisplay Data: {hex(self.OffsetToDisplayData)}"
-        return t
-
-class DisplayObjectPositionHeader:
-    size_of_struct = 0x8
-    quantize_info={
-        "size info":{
-            0x1:4,
-            0x2:2,
-            0x3:2,
-            0x4:1,
-            0x5:1
-        },
-        "signed info":{
-            0x1:True,
-            0x2:False,
-            0x3:True,
-            0x4:False,
-            0x5:True
-        }
-    }
-
-    def __init__(self, b:bytes) -> None:
-        assert(len(b) == self.size_of_struct)
-        i = ints_from_bytes(b[0:4], b[4:6], b[6], b[7])
-        self.offsetToPositionArray = i[0]
-        self.numberOfPositions = i[1]
-        self.quantizeInfo = i[2]
-        
-        self.format = self.quantizeInfo >> 4
-        self.componentSize = self.quantize_info["size info"][self.format]
-        self.componentShift = self.quantizeInfo & 0xf
-        self.componentSigned = self.quantize_info["signed info"][self.format]
-
-        self.numberOfComponents = i[3]
-
-    def add_offset(self, offset:int)->None:
-        if self.offsetToPositionArray != 0:
-            self.offsetToPositionArray += offset
-    
-    def __str__(self) -> str:
-        t = ""
-        t += f"=={self.__class__.__name__}==\n"
-        t += f"pPositions: {hex(self.offsetToPositionArray)}\n"
-        t += f"Position Count: {hex(self.numberOfPositions)}\n"
-        t += f"Quantize Info: {hex(self.quantizeInfo)}\n"
-        t += f"Component Count: {self.numberOfComponents}"
-
-        return t
-
-
-class DisplayObjectColorHeader:
-    size_of_struct = 0x8
-
-    quantize_info = {
-        0x0:2,
-        0x1:3,
-        0x2:4,
-        0x3:2,
-        0x4:3,
-        0x5:4,
-    }
-
-    def __init__(self, b:bytes) -> None:
-        assert(len(b) == self.size_of_struct)
-        i = ints_from_bytes(b[0:4], b[4:6], b[6], b[7])
-        self.offsetToColorArray = i[0]
-        self.numberOfColors = i[1]
-        self.quantizeInfo = i[2]
-        
-        self.format = self.quantizeInfo >> 4
-        self.alpha = self.format > 2
-        self.componentSize = self.quantize_info[self.format]
-        self.numberOfComponents = i[3]
-
-    def add_offset(self, offset:int)->None:
-        if self.offsetToColorArray != 0:
-            self.offsetToColorArray += offset
-
-    def __str__(self) -> str:
-        t = ""
-        t += f"=={self.__class__.__name__}==\n"
-        t += f"pColors: {hex(self.offsetToColorArray)}\n"
-        t += f"Color Count: {self.numberOfColors}\n"
-        t += f"Format Info: {hex(self.quantizeInfo)}\n"
-        t += f"Component Count: {self.numberOfComponents}"
-
-        return t
-
-class DisplayObjectTextureHeader:
-    size_of_struct = 0x10
-
-    quantize_info={
-        "size info":{
-            0x1:4,
-            0x2:2,
-            0x3:2,
-            0x4:1,
-            0x5:1
-        },
-        "signed info":{
-            0x1:True,
-            0x2:False,
-            0x3:True,
-            0x4:False,
-            0x5:True
-        }
-    }
-
-    def __init__(self, b:bytes) -> None:
-        assert(len(b) == self.size_of_struct)
-        i = ints_from_bytes(b[0:4], b[4:6], b[6:7], b[7:8], b[8:12])
-        self.offsetToTextureCoordinateArray = i[0]
-        self.numberOfCoordinates = i[1]
-        self.quantizeInfo = i[2]
-        
-        self.format = self.quantizeInfo >> 4
-        self.componentSize = self.quantize_info["size info"][self.format]
-        self.componentShift = self.quantizeInfo & 0xf
-        self.componentSigned = self.quantize_info["signed info"][self.format]
-
-        self.numberOfComponents = i[3]
-        self.offsetToTexturePaletteFileName = i[4]
-
-        self.name = None
-
-    def add_offset(self, offset:int)->None:
-        if self.offsetToTextureCoordinateArray != 0:
-            self.offsetToTextureCoordinateArray += offset
-        
-        if self.offsetToTexturePaletteFileName != 0:
-            self.offsetToTexturePaletteFileName += offset
-
-    def __str__(self) -> str:
-        t = ""
-        t += f"=={self.__class__.__name__}==\n"
-        t += f"Name: {self.name}\n"
-        t += f"pName: {hex(self.offsetToTexturePaletteFileName)}\n"
-        t += f"pTexture Coords: {hex(self.offsetToTextureCoordinateArray)}\n"
-        t += f"Coord Count: {self.numberOfCoordinates}\n"
-        t += f"Format Info: {hex(self.quantizeInfo)}\n"
-        t += f"Component Count: {self.numberOfComponents}"
-
-        return t
-
-
-class DisplayObjectLightingHeader:
-    size_of_struct = 0xc
-    quantize_info={
-        "size info":{
-            0x1:4,
-            0x2:2,
-            0x3:2,
-            0x4:1,
-            0x5:1
-        },
-        "signed info":{
-            0x1:True,
-            0x2:False,
-            0x3:True,
-            0x4:False,
-            0x5:True
-        }
-    }
-
-    def __init__(self, b:bytes) -> None:
-        assert(len(b) == self.size_of_struct)
-        i = ints_from_bytes(b[0:4], b[4:6], b[6:7], b[7:8])
-        self.offsetToNormalArray = i[0]
-        self.numberOfNormals = i[1]
-        self.quantizeInfo = i[2]
-        
-        self.format = self.quantizeInfo >> 4
-        self.componentSize = self.quantize_info["size info"][self.format]
-        self.componentShift = self.quantizeInfo & 0xf
-        self.componentSigned = self.quantize_info["signed info"][self.format]
-
-        self.numberOfComponents = i[3]
-        ba = bytearray(b[8:12])
-        ba.reverse()
-        self.ambientBrightness = float_from_bytes(ba)
-
-    def add_offset(self, offset:int)->None:
-        if self.offsetToNormalArray != 0:
-            self.offsetToNormalArray += offset
-
-    def __str__(self) -> str: 
-        t = ""
-        t += f"=={self.__class__.__name__}==\n"
-        t += f"pNormals: {hex(self.offsetToNormalArray)}\n"
-        t += f"Normal Count: {self.numberOfNormals}\n"
-        t += f"Format Info: {hex(self.quantizeInfo)}\n"
-        t += f"Component Count: {self.numberOfComponents}\n"
-        t += f"Ambient Brightness: {self.ambientBrightness}"
-        return t
-
-
-class DisplayObjectDisplayHeader:
-    size_of_struct = 0xc
-    def __init__(self, b:bytes) -> None:
-        assert(len(b) == self.size_of_struct)
-        i = ints_from_bytes(b[0:4], b[4:8], b[8:10])
-        self.offsetToPrimitiveBank = i[0]
-        self.offsetToDisplayStateList = i[1]
-        self.numberOfDisplayStateEntries = i[2]
-    
-    def add_offset(self, offset:int)->None:
-        if self.offsetToPrimitiveBank != 0:
-            self.offsetToPrimitiveBank += offset
-        
-        if self.offsetToDisplayStateList != 0:
-            self.offsetToDisplayStateList += offset
-    
-    def __str__(self) -> str: 
-        t= ""
-        t += f"=={self.__class__.__name__}==\n"
-        t += f"pPrimitive Bank: {hex(self.offsetToPrimitiveBank)}\n"
-        t += f"pDisplay States: {hex(self.offsetToDisplayStateList)}\n"
-        t += f"Display State Count: {self.numberOfDisplayStateEntries}"
-        return t
-
-        
-class DisplayObjectDisplayState:
-    size_of_struct = 0x10
-    def __init__(self, b:bytes) -> None:
-        assert(len(b) == self.size_of_struct)
-        i = ints_from_bytes(b[0], b[4:8], b[8:12], b[12:16])
-        self.stateID = i[0]
-        self.setting = i[1]
-        self.offsetToPrimitiveList = i[2]
-        self.byteLengthPrimitiveList = i[3]
-    
-    def add_offset(self, offset:int)->None:
-        if self.offsetToPrimitiveList != 0:
-            self.offsetToPrimitiveList += offset
-    
-    def __str__(self) -> str: 
-        t = ""
-        t += f"=={self.__class__.__name__}==\n"
-        t += f"State ID: {self.stateID}\n"
-        t += f"Setting: {hex(self.setting)}\n"
-        t += f"pPrimitive List: {hex(self.offsetToPrimitiveList)}\n"
-        t += f"Primitive Byte Count: {self.byteLengthPrimitiveList}"
-        
-        return t
+    return [OBJFace(face) for face in faces_to_return]
 
 if __name__ == "__main__":
     main()

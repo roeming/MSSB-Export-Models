@@ -2,9 +2,9 @@ from genericpath import exists
 import json
 import os
 import sys
-import hashlib
 
 from tools.conversions import *
+from tools.file_helper import *
 
 import extractImages
 import extractModel
@@ -28,17 +28,10 @@ def main():
     with open(json_extra_file_name, "r") as f:
         extra_count = len(json.load(f)["Decompressions"])
 
-    sha1 = hashlib.sha1()
-    with open(ZZZZ_file_name, 'rb') as f:
-        while True:
-            data = f.read(65536)
-            if not data:
-                break
-            sha1.update(data)
-
-    if sha1.hexdigest() != ZZZZ_hash:
+    if exists(ZZZZ_file_name) and calculate_sha1(ZZZZ_file_name) != ZZZZ_hash:
         print(f"Your {ZZZZ_file_name} doesn't match the known hash. Please re-export your file, and try again.")
-        print(f"Also, please verify the dump of your rom.\nYou can do this by opening Dolphin, right clicking on your rom -> Properties -> Verify -> Verify Integrity.")
+        print(f"Also, please verify the dump of your rom.")
+        print(f"You can do this by opening Dolphin, right clicking on your rom -> Properties -> Verify -> Verify Integrity.")
         err = True
 
     if err:
@@ -93,6 +86,7 @@ def main():
 
     decompression_method(to_decompress, output_folder)
 
+
 def regular_decompress(entries, output_folder):
     to_decompress = entries
     failed = []
@@ -102,19 +96,36 @@ def regular_decompress(entries, output_folder):
             print(f"Starting write {this_file}")
             new_folder = os.path.join(output_folder, this_file.split(".")[0])
 
-            if not exists(new_folder):
-                os.mkdir(new_folder)
-
             output_file = os.path.join(new_folder, this_file)
-            mssbDecompress.decompress(d["Input"], output_file, d["offset"], d["size"], d["b1"], d["b2"])
+            if not exists(output_file):
+                decompressor = mssbDecompress.MSSBDecompressor(d["Input"], d["offset"], d["size"], d["b1"], d["b2"])
+                
+                decompressed_file = decompressor.decompress()
+                if decompressed_file is None:
+                    print(f"failed to decompress {this_file}, skipping")
+                    continue
+        
+                if not exists(new_folder):
+                    os.mkdir(new_folder)
+
+                success = write_bytes(output_file, decompressed_file)
+                del decompressed_file
+
+                if not success:
+                    print(f"failed to write {this_file}, skipping")
+                    continue
+
             for f in d["Files"]:
+                
                 if f["Type"] == "Texture":
-                    extractImages.export_images(output_file, new_folder, f["Entry"])
+                    extractImages.write_images(output_file, new_folder, f["Entry"], True)
+                
                 elif f["Type"] == "Model":
                     extractModel.export_model(output_file, new_folder, f["Entry"])
+            
             print(f"Finished decompressing {this_file}\n")
 
-        except AssertionError as err:
+        except IndexError as err:
             print(f"Failed to decompress {this_file}, {err=}, skipping")
             failed.append((this_file, sys.exc_info()))
 
