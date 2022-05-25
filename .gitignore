@@ -15,6 +15,7 @@ downloads/
 eggs/
 Outputs/
 *.dat
+test/
 .eggs/
 lib/
 lib64/

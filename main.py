@@ -114,6 +114,8 @@ def regular_decompress(entries, output_folder):
                 if not success:
                     print(f"failed to write {this_file}, skipping")
                     continue
+                write_bytes(output_file + ".raw", decompressor.byte_reader.allBytes)
+                del decompressor
 
             for f in d["Files"]:
                 

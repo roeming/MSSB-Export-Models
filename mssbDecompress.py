@@ -1,7 +1,5 @@
 
 from genericpath import exists
-import os
-from posixpath import dirname
 
 class MSSBByteReadBuffer:
     def __init__(self, file_name: str, offset: int) -> None:
@@ -15,13 +13,15 @@ class MSSBByteReadBuffer:
 
         self.bits_in_buffer = 0
         self.buffer = 0
-        self.allBytes = []
+        self.allBytes = bytearray()
     
     def __read_new_byte__(self) ->  int:
-        b = int.to_bytes(self.file_bytes[self.byte_offset], 1, "big", signed=False)
+        new_byte = self.file_bytes[self.byte_offset]
+        self.allBytes.append(new_byte)
+
+        b = int.to_bytes(new_byte, 1, "big", signed=False)
         self.byte_offset += 1
 
-        self.allBytes.append(b)
         return int.from_bytes(b, "big", signed = False) 
 
     def read_bits(self, num: int) -> bytes:
@@ -96,7 +96,7 @@ class MSSBDecompressor:
 
         bytesToRead = self.size
 
-        final_data = []
+        final_data = bytearray()
 
         while bytesToRead > 0:
             # returns 0 or 1
@@ -112,12 +112,10 @@ class MSSBDecompressor:
                     return None
                 while repetitions != 0:
                     data = final_data[-(far_back+1)]
-                    # print(hex(data))
                     final_data.append(data)
                     repetitions -= 1
             else:
                 data = self.byte_reader.read_bits(8)
-                # print(hex(data))
                 final_data.append(data)
                 bytesToRead -= 1
 
@@ -179,8 +177,7 @@ def decompress(file_name:str, output_name:str, offset:int, size:int, b1:int, b2:
     else:
         print("Finished decompressing file, writing now.")
         with open(output_name, "wb") as f:
-            for aa in a:
-                f.write(int.to_bytes(aa, 1, "big", signed=False))
+            f.write(a)
 
     print("Completed decompressing")
     return True
