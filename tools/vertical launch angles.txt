@@ -1,0 +1,419 @@
+For MidTraj, Slap, Right Sour, 0x7a=False:
+0% for -4.39° <-> 4.39°
+10% for 4.39° <-> 8.79°
+20% for 8.79° <-> 26.37°
+30% for 26.37° <-> 35.16°
+40% for 35.16° <-> 43.95°
+
+For MidTraj, Slap, Right Sour, 0x7a=True:
+0% for -4.39° <-> 4.39°
+10% for 4.39° <-> 8.79°
+20% for 8.79° <-> 26.37°
+30% for 26.37° <-> 35.16°
+40% for 35.16° <-> 43.95°
+
+For MidTraj, Slap, Right Nice, 0x7a=False:
+20% for 4.39° <-> 13.18°
+20% for 13.18° <-> 17.58°
+20% for 17.58° <-> 21.97°
+20% for 21.97° <-> 26.37°
+20% for 26.37° <-> 30.76°
+
+For MidTraj, Slap, Right Nice, 0x7a=True:
+20% for 4.39° <-> 13.18°
+20% for 13.18° <-> 17.58°
+20% for 17.58° <-> 21.97°
+20% for 21.97° <-> 26.37°
+20% for 26.37° <-> 30.76°
+
+For MidTraj, Slap, Perfect, 0x7a=False:
+10% for 4.39° <-> 13.18°
+25% for 13.18° <-> 17.58°
+30% for 13.18° <-> 17.58°
+25% for 17.58° <-> 26.37°
+10% for 26.37° <-> 30.76°
+
+For MidTraj, Slap, Perfect, 0x7a=True:
+10% for 4.39° <-> 13.18°
+25% for 13.18° <-> 17.58°
+30% for 13.18° <-> 17.58°
+25% for 17.58° <-> 26.37°
+10% for 26.37° <-> 30.76°
+
+For MidTraj, Slap, Left Nice, 0x7a=False:
+20% for 4.39° <-> 13.18°
+20% for 13.18° <-> 17.58°
+20% for 17.58° <-> 21.97°
+20% for 21.97° <-> 26.37°
+20% for 26.37° <-> 30.76°
+
+For MidTraj, Slap, Left Nice, 0x7a=True:
+20% for 4.39° <-> 13.18°
+20% for 13.18° <-> 17.58°
+20% for 17.58° <-> 21.97°
+20% for 21.97° <-> 26.37°
+20% for 26.37° <-> 30.76°
+
+For MidTraj, Slap, Left Sour, 0x7a=False:
+40% for -4.39° <-> 4.39°
+30% for 4.39° <-> 8.79°
+20% for 8.79° <-> 26.37°
+10% for 26.37° <-> 35.16°
+0% for 35.16° <-> 43.95°
+
+For MidTraj, Slap, Left Sour, 0x7a=True:
+40% for -4.39° <-> 4.39°
+30% for 4.39° <-> 8.79°
+20% for 8.79° <-> 26.37°
+10% for 26.37° <-> 35.16°
+0% for 35.16° <-> 43.95°
+
+For MidTraj, Charge, Right Sour, 0x7a=False:
+10% for 35.16° <-> 39.55°
+0% for 39.55° <-> 43.95°
+20% for 43.95° <-> 48.34°
+30% for 48.34° <-> 52.73°
+40% for 48.34° <-> 52.73°
+
+For MidTraj, Charge, Right Sour, 0x7a=True:
+10% for 35.16° <-> 39.55°
+0% for 39.55° <-> 43.95°
+20% for 43.95° <-> 48.34°
+30% for 48.34° <-> 52.73°
+40% for 48.34° <-> 52.73°
+
+For MidTraj, Charge, Right Nice, 0x7a=False:
+20% for 4.39° <-> 8.79°
+22% for 8.79° <-> 13.18°
+22% for 26.37° <-> 35.16°
+28% for 30.76° <-> 39.55°
+8% for 35.16° <-> 43.95°
+
+For MidTraj, Charge, Right Nice, 0x7a=True:
+20% for 4.39° <-> 8.79°
+22% for 8.79° <-> 13.18°
+22% for 26.37° <-> 35.16°
+28% for 30.76° <-> 39.55°
+8% for 35.16° <-> 43.95°
+
+For MidTraj, Charge, Perfect, 0x7a=False:
+20% for 8.79° <-> 17.58°
+25% for 30.76° <-> 35.16°
+25% for 39.55° <-> 43.95°
+25% for 43.95° <-> 48.34°
+5% for 46.58° <-> 50.98°
+
+For MidTraj, Charge, Perfect, 0x7a=True:
+20% for 8.79° <-> 17.58°
+25% for 30.76° <-> 35.16°
+25% for 39.55° <-> 43.95°
+25% for 43.95° <-> 48.34°
+5% for 46.58° <-> 50.98°
+
+For MidTraj, Charge, Left Nice, 0x7a=False:
+20% for 4.39° <-> 8.79°
+22% for 8.79° <-> 13.18°
+22% for 26.37° <-> 35.16°
+28% for 30.76° <-> 39.55°
+8% for 35.16° <-> 43.95°
+
+For MidTraj, Charge, Left Nice, 0x7a=True:
+20% for 4.39° <-> 8.79°
+22% for 8.79° <-> 13.18°
+22% for 26.37° <-> 35.16°
+28% for 30.76° <-> 39.55°
+8% for 35.16° <-> 43.95°
+
+For MidTraj, Charge, Left Sour, 0x7a=False:
+10% for 35.16° <-> 39.55°
+0% for 39.55° <-> 43.95°
+20% for 43.95° <-> 48.34°
+30% for 48.34° <-> 52.73°
+40% for 48.34° <-> 52.73°
+
+For MidTraj, Charge, Left Sour, 0x7a=True:
+10% for 35.16° <-> 39.55°
+0% for 39.55° <-> 43.95°
+20% for 43.95° <-> 48.34°
+30% for 48.34° <-> 52.73°
+40% for 48.34° <-> 52.73°
+
+For HighTraj, Slap, Right Sour, 0x7a=False:
+0% for -4.39° <-> 4.39°
+10% for 4.39° <-> 8.79°
+20% for 8.79° <-> 26.37°
+30% for 26.37° <-> 35.16°
+40% for 35.16° <-> 43.95°
+
+For HighTraj, Slap, Right Sour, 0x7a=True:
+0% for -4.39° <-> 4.39°
+10% for 4.39° <-> 8.79°
+20% for 8.79° <-> 26.37°
+30% for 26.37° <-> 35.16°
+40% for 35.16° <-> 43.95°
+
+For HighTraj, Slap, Right Nice, 0x7a=False:
+5% for 4.39° <-> 13.18°
+5% for 13.18° <-> 17.58°
+15% for 17.58° <-> 21.97°
+40% for 21.97° <-> 26.37°
+35% for 26.37° <-> 30.76°
+
+For HighTraj, Slap, Right Nice, 0x7a=True:
+5% for 4.39° <-> 13.18°
+5% for 13.18° <-> 17.58°
+15% for 17.58° <-> 21.97°
+40% for 21.97° <-> 26.37°
+35% for 26.37° <-> 30.76°
+
+For HighTraj, Slap, Perfect, 0x7a=False:
+5% for 4.39° <-> 13.18°
+5% for 13.18° <-> 17.58°
+20% for 13.18° <-> 17.58°
+40% for 17.58° <-> 26.37°
+35% for 26.37° <-> 30.76°
+
+For HighTraj, Slap, Perfect, 0x7a=True:
+5% for 4.39° <-> 13.18°
+5% for 13.18° <-> 17.58°
+20% for 13.18° <-> 17.58°
+40% for 17.58° <-> 26.37°
+35% for 26.37° <-> 30.76°
+
+For HighTraj, Slap, Left Nice, 0x7a=False:
+5% for 4.39° <-> 13.18°
+5% for 13.18° <-> 17.58°
+15% for 17.58° <-> 21.97°
+40% for 21.97° <-> 26.37°
+35% for 26.37° <-> 30.76°
+
+For HighTraj, Slap, Left Nice, 0x7a=True:
+5% for 4.39° <-> 13.18°
+5% for 13.18° <-> 17.58°
+15% for 17.58° <-> 21.97°
+40% for 21.97° <-> 26.37°
+35% for 26.37° <-> 30.76°
+
+For HighTraj, Slap, Left Sour, 0x7a=False:
+40% for -4.39° <-> 4.39°
+30% for 4.39° <-> 8.79°
+20% for 8.79° <-> 26.37°
+10% for 26.37° <-> 35.16°
+0% for 35.16° <-> 43.95°
+
+For HighTraj, Slap, Left Sour, 0x7a=True:
+40% for -4.39° <-> 4.39°
+30% for 4.39° <-> 8.79°
+20% for 8.79° <-> 26.37°
+10% for 26.37° <-> 35.16°
+0% for 35.16° <-> 43.95°
+
+For HighTraj, Charge, Right Sour, 0x7a=False:
+5% for 35.16° <-> 39.55°
+0% for 39.55° <-> 43.95°
+10% for 43.95° <-> 48.34°
+40% for 48.34° <-> 52.73°
+45% for 48.34° <-> 52.73°
+
+For HighTraj, Charge, Right Sour, 0x7a=True:
+5% for 35.16° <-> 39.55°
+0% for 39.55° <-> 43.95°
+10% for 43.95° <-> 48.34°
+40% for 48.34° <-> 52.73°
+45% for 48.34° <-> 52.73°
+
+For HighTraj, Charge, Right Nice, 0x7a=False:
+5% for 4.39° <-> 8.79°
+21% for 8.79° <-> 13.18°
+12% for 26.37° <-> 35.16°
+29% for 30.76° <-> 39.55°
+33% for 35.16° <-> 43.95°
+
+For HighTraj, Charge, Right Nice, 0x7a=True:
+5% for 4.39° <-> 8.79°
+21% for 8.79° <-> 13.18°
+12% for 26.37° <-> 35.16°
+29% for 30.76° <-> 39.55°
+33% for 35.16° <-> 43.95°
+
+For HighTraj, Charge, Perfect, 0x7a=False:
+5% for 8.79° <-> 17.58°
+23% for 30.76° <-> 35.16°
+15% for 39.55° <-> 43.95°
+27% for 43.95° <-> 48.34°
+30% for 46.58° <-> 50.98°
+
+For HighTraj, Charge, Perfect, 0x7a=True:
+5% for 8.79° <-> 17.58°
+23% for 30.76° <-> 35.16°
+15% for 39.55° <-> 43.95°
+27% for 43.95° <-> 48.34°
+30% for 46.58° <-> 50.98°
+
+For HighTraj, Charge, Left Nice, 0x7a=False:
+5% for 4.39° <-> 8.79°
+21% for 8.79° <-> 13.18°
+12% for 26.37° <-> 35.16°
+29% for 30.76° <-> 39.55°
+33% for 35.16° <-> 43.95°
+
+For HighTraj, Charge, Left Nice, 0x7a=True:
+5% for 4.39° <-> 8.79°
+21% for 8.79° <-> 13.18°
+12% for 26.37° <-> 35.16°
+29% for 30.76° <-> 39.55°
+33% for 35.16° <-> 43.95°
+
+For HighTraj, Charge, Left Sour, 0x7a=False:
+5% for 35.16° <-> 39.55°
+0% for 39.55° <-> 43.95°
+10% for 43.95° <-> 48.34°
+40% for 48.34° <-> 52.73°
+45% for 48.34° <-> 52.73°
+
+For HighTraj, Charge, Left Sour, 0x7a=True:
+5% for 35.16° <-> 39.55°
+0% for 39.55° <-> 43.95°
+10% for 43.95° <-> 48.34°
+40% for 48.34° <-> 52.73°
+45% for 48.34° <-> 52.73°
+
+For LowTraj, Slap, Right Sour, 0x7a=False:
+10% for -4.39° <-> 4.39°
+20% for 4.39° <-> 8.79°
+20% for 8.79° <-> 26.37°
+20% for 26.37° <-> 35.16°
+30% for 35.16° <-> 43.95°
+
+For LowTraj, Slap, Right Sour, 0x7a=True:
+10% for -4.39° <-> 4.39°
+20% for 4.39° <-> 8.79°
+20% for 8.79° <-> 26.37°
+20% for 26.37° <-> 35.16°
+30% for 35.16° <-> 43.95°
+
+For LowTraj, Slap, Right Nice, 0x7a=False:
+35% for 4.39° <-> 13.18°
+40% for 13.18° <-> 17.58°
+15% for 17.58° <-> 21.97°
+5% for 21.97° <-> 26.37°
+5% for 26.37° <-> 30.76°
+
+For LowTraj, Slap, Right Nice, 0x7a=True:
+35% for 4.39° <-> 13.18°
+40% for 13.18° <-> 17.58°
+15% for 17.58° <-> 21.97°
+5% for 21.97° <-> 26.37°
+5% for 26.37° <-> 30.76°
+
+For LowTraj, Slap, Perfect, 0x7a=False:
+30% for 4.39° <-> 13.18°
+40% for 13.18° <-> 17.58°
+20% for 13.18° <-> 17.58°
+5% for 17.58° <-> 26.37°
+5% for 26.37° <-> 30.76°
+
+For LowTraj, Slap, Perfect, 0x7a=True:
+30% for 4.39° <-> 13.18°
+40% for 13.18° <-> 17.58°
+20% for 13.18° <-> 17.58°
+5% for 17.58° <-> 26.37°
+5% for 26.37° <-> 30.76°
+
+For LowTraj, Slap, Left Nice, 0x7a=False:
+35% for 4.39° <-> 13.18°
+40% for 13.18° <-> 17.58°
+15% for 17.58° <-> 21.97°
+5% for 21.97° <-> 26.37°
+5% for 26.37° <-> 30.76°
+
+For LowTraj, Slap, Left Nice, 0x7a=True:
+35% for 4.39° <-> 13.18°
+40% for 13.18° <-> 17.58°
+15% for 17.58° <-> 21.97°
+5% for 21.97° <-> 26.37°
+5% for 26.37° <-> 30.76°
+
+For LowTraj, Slap, Left Sour, 0x7a=False:
+40% for -4.39° <-> 4.39°
+30% for 4.39° <-> 8.79°
+20% for 8.79° <-> 26.37°
+5% for 26.37° <-> 35.16°
+5% for 35.16° <-> 43.95°
+
+For LowTraj, Slap, Left Sour, 0x7a=True:
+40% for -4.39° <-> 4.39°
+30% for 4.39° <-> 8.79°
+20% for 8.79° <-> 26.37°
+5% for 26.37° <-> 35.16°
+5% for 35.16° <-> 43.95°
+
+For LowTraj, Charge, Right Sour, 0x7a=False:
+10% for 35.16° <-> 39.55°
+0% for 39.55° <-> 43.95°
+20% for 43.95° <-> 48.34°
+30% for 48.34° <-> 52.73°
+40% for 48.34° <-> 52.73°
+
+For LowTraj, Charge, Right Sour, 0x7a=True:
+10% for 35.16° <-> 39.55°
+0% for 39.55° <-> 43.95°
+20% for 43.95° <-> 48.34°
+30% for 48.34° <-> 52.73°
+40% for 48.34° <-> 52.73°
+
+For LowTraj, Charge, Right Nice, 0x7a=False:
+35% for 4.39° <-> 8.79°
+30% for 8.79° <-> 13.18°
+22% for 26.37° <-> 35.16°
+10% for 30.76° <-> 39.55°
+3% for 35.16° <-> 43.95°
+
+For LowTraj, Charge, Right Nice, 0x7a=True:
+35% for 4.39° <-> 8.79°
+30% for 8.79° <-> 13.18°
+22% for 26.37° <-> 35.16°
+10% for 30.76° <-> 39.55°
+3% for 35.16° <-> 43.95°
+
+For LowTraj, Charge, Perfect, 0x7a=False:
+30% for 8.79° <-> 17.58°
+30% for 30.76° <-> 35.16°
+25% for 39.55° <-> 43.95°
+15% for 43.95° <-> 48.34°
+0% for 46.58° <-> 50.98°
+
+For LowTraj, Charge, Perfect, 0x7a=True:
+30% for 8.79° <-> 17.58°
+30% for 30.76° <-> 35.16°
+25% for 39.55° <-> 43.95°
+15% for 43.95° <-> 48.34°
+0% for 46.58° <-> 50.98°
+
+For LowTraj, Charge, Left Nice, 0x7a=False:
+35% for 4.39° <-> 8.79°
+30% for 8.79° <-> 13.18°
+22% for 26.37° <-> 35.16°
+10% for 30.76° <-> 39.55°
+3% for 35.16° <-> 43.95°
+
+For LowTraj, Charge, Left Nice, 0x7a=True:
+35% for 4.39° <-> 8.79°
+30% for 8.79° <-> 13.18°
+22% for 26.37° <-> 35.16°
+10% for 30.76° <-> 39.55°
+3% for 35.16° <-> 43.95°
+
+For LowTraj, Charge, Left Sour, 0x7a=False:
+10% for 35.16° <-> 39.55°
+0% for 39.55° <-> 43.95°
+20% for 43.95° <-> 48.34°
+30% for 48.34° <-> 52.73°
+40% for 48.34° <-> 52.73°
+
+For LowTraj, Charge, Left Sour, 0x7a=True:
+10% for 35.16° <-> 39.55°
+0% for 39.55° <-> 43.95°
+20% for 43.95° <-> 48.34°
+30% for 48.34° <-> 52.73°
+40% for 48.34° <-> 52.73°

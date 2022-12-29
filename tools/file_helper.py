@@ -40,3 +40,7 @@ def calculate_sha1(file_name:str) -> str:
                 break
             sha1.update(data)
     return sha1.hexdigest()
+
+def write_lines(file_name:str, s:list[str]) -> None:
+    with open(file_name, "w") as f:
+        f.write("\n".join(s))

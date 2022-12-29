@@ -1,22 +1,29 @@
 
 from genericpath import exists
 
+file_cache = {}
+
 class MSSBByteReadBuffer:
     def __init__(self, file_name: str, offset: int) -> None:
         self.file_name = file_name
         self.offset = offset
         
-        file = open(self.file_name, "rb")
-        file.seek(self.offset)
-        self.file_bytes = file.read()
-        self.byte_offset = 0
+        if file_name not in file_cache:
+            file = open(self.file_name, "rb")
+            file_cache[self.file_name] = file.read()
+            file.close()
+            del file
+        
+        # self.file_bytes = file_cache[self.file_name][self.offset:]
+        
+        self.byte_offset = self.offset
 
         self.bits_in_buffer = 0
         self.buffer = 0
         self.allBytes = bytearray()
     
     def __read_new_byte__(self) ->  int:
-        new_byte = self.file_bytes[self.byte_offset]
+        new_byte = file_cache[self.file_name][self.byte_offset]
         self.allBytes.append(new_byte)
 
         b = int.to_bytes(new_byte, 1, "big", signed=False)
@@ -71,8 +78,13 @@ class MSSBByteReadBuffer:
             self.buffer = nextData >> bitsNeededToRead
         return bit
 
+    def remaining_bytes(self)->int:
+        return len(file_cache[self.file_name]) - self.byte_offset
+
     def close(self):
-        del self.file_bytes
+        pass
+        # del self.file_bytes
+
 
 class MSSBDecompressor:
 
@@ -83,6 +95,7 @@ class MSSBDecompressor:
         self.b1 = b1
         self.b2 = b2
         self.byte_reader = None
+        self.final_data = bytearray()
 
     def __init_byte_reader__(self):
         self.byte_reader = MSSBByteReadBuffer(self.file_name, self.offset)
@@ -96,33 +109,37 @@ class MSSBDecompressor:
 
         bytesToRead = self.size
 
-        final_data = bytearray()
+        if self.byte_reader.remaining_bytes() < bytesToRead:
+            return None
+
+        self.final_data = bytearray()
 
         while bytesToRead > 0:
             # returns 0 or 1
+            
             head_bit = self.byte_reader.read_bits(1)
             if head_bit == 0:
                 far_back = self.byte_reader.read_bits(self.b1)
                 repetitions = self.byte_reader.read_bits(self.b2)
                 repetitions += 2
                 bytesToRead -= repetitions
-                if far_back > len(final_data):
+                if far_back >= len(self.final_data) or len(self.final_data) == 0:
                     # if there is a sequence requested to be read that is before the start of the array, then stop
-                    print("read %d bytes, Got weird data" % (self.size - bytesToRead))
+                    # print("read %d bytes, Got weird data" % (self.size - bytesToRead))
                     return None
                 while repetitions != 0:
-                    data = final_data[-(far_back+1)]
-                    final_data.append(data)
+                    data = self.final_data[-(far_back+1)]
+                    self.final_data.append(data)
                     repetitions -= 1
             else:
                 data = self.byte_reader.read_bits(8)
-                final_data.append(data)
+                self.final_data.append(data)
                 bytesToRead -= 1
 
         self.byte_reader.close()
-        return final_data
+        return self.final_data
 
-__default_b_values__ = ("11, 4")
+__DEFAULT_B_VALUES__ = ("11, 4")
 
 def hex_if_possible(num:str)->int:
     if "0x" in num:
@@ -146,7 +163,7 @@ def main():
     b_values = input("Enter the compression constants (enter nothing to use the default 11,4 values) (use 0x for hex): ")
 
     if len(b_values) == 0 or b_values.isspace():
-        b_values = __default_b_values__
+        b_values = __DEFAULT_B_VALUES__
 
     b1 = None
     b2 = None

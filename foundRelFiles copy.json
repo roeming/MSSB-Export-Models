@@ -1,0 +1,844 @@
+{
+    "Decompressions": [
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression001.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 3657564,
+            "offset": 414427136,
+            "d4": 2132720,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression004.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 260560,
+            "offset": 427155456,
+            "d4": 154728,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression006.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 273020,
+            "offset": 423020544,
+            "d4": 175500,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression007.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 232072,
+            "offset": 429836288,
+            "d4": 146528,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression008.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 248832,
+            "offset": 428931072,
+            "d4": 163640,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression010.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 147192,
+            "offset": 428531712,
+            "d4": 94836,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression013.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 267172,
+            "offset": 423538688,
+            "d4": 168624,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression014.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 92544,
+            "offset": 245843968,
+            "d4": 54988,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression016.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 282408,
+            "offset": 423829504,
+            "d4": 185836,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression017.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 214864,
+            "offset": 427888640,
+            "d4": 131268,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression019.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 369464,
+            "offset": 421736448,
+            "d4": 238664,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression020.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 449632,
+            "offset": 419522560,
+            "d4": 151376,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression022.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 260560,
+            "offset": 427311104,
+            "d4": 154728,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression023.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 316996,
+            "offset": 421976064,
+            "d4": 200288,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression024.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 240920,
+            "offset": 430233600,
+            "d4": 138684,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression027.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 198004,
+            "offset": 429094912,
+            "d4": 120640,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression028.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 209020,
+            "offset": 428627968,
+            "d4": 132024,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression029.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 232072,
+            "offset": 429578240,
+            "d4": 146528,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression031.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 433660,
+            "offset": 417933312,
+            "d4": 264400,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression032.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 293680,
+            "offset": 423196672,
+            "d4": 185768,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression033.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 132288,
+            "offset": 421271552,
+            "d4": 81868,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression035.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 198004,
+            "offset": 429336576,
+            "d4": 120640,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression037.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 404532,
+            "offset": 424163328,
+            "d4": 263668,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression039.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 694260,
+            "offset": 419901440,
+            "d4": 298732,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression042.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 305184,
+            "offset": 422623232,
+            "d4": 202464,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression044.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 718056,
+            "offset": 420378624,
+            "d4": 317444,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression045.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 198004,
+            "offset": 423708672,
+            "d4": 120640,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression050.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 666292,
+            "offset": 419674112,
+            "d4": 225784,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression051.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 193512,
+            "offset": 425519104,
+            "d4": 123764,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression052.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 248472,
+            "offset": 428138496,
+            "d4": 161420,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression053.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 173064,
+            "offset": 429725696,
+            "d4": 109408,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression057.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 103400,
+            "offset": 421234688,
+            "d4": 35288,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression058.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 400560,
+            "offset": 422176768,
+            "d4": 254560,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression059.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 2312476,
+            "offset": 420698112,
+            "d4": 534824,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression063.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 92544,
+            "offset": 245788672,
+            "d4": 55072,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression064.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 1174564,
+            "offset": 418439168,
+            "d4": 886808,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression065.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 377036,
+            "offset": 424427520,
+            "d4": 246668,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression068.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 289636,
+            "offset": 422432768,
+            "d4": 189676,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression070.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 321060,
+            "offset": 424675328,
+            "d4": 209908,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression071.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 260560,
+            "offset": 426999808,
+            "d4": 154728,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression072.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 265968,
+            "offset": 426332160,
+            "d4": 167456,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression073.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 163832,
+            "offset": 426739712,
+            "d4": 99640,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression074.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 43040,
+            "offset": 418199552,
+            "d4": 14168,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression076.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 294264,
+            "offset": 422825984,
+            "d4": 193244,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression078.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 292036,
+            "offset": 425072640,
+            "d4": 185028,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression079.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 322392,
+            "offset": 425830400,
+            "d4": 203364,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression080.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 260560,
+            "offset": 427466752,
+            "d4": 154728,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression081.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 286976,
+            "offset": 241438720,
+            "d4": 150344,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression083.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 92544,
+            "offset": 246009856,
+            "d4": 46404,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression084.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 92544,
+            "offset": 245458944,
+            "d4": 54980,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression088.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 504528,
+            "offset": 420200448,
+            "d4": 177440,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression089.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 92544,
+            "offset": 245626880,
+            "d4": 54860,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression091.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 92544,
+            "offset": 245954560,
+            "d4": 53436,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression092.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 185272,
+            "offset": 426035200,
+            "d4": 115236,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression093.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 163832,
+            "offset": 426639360,
+            "d4": 99640,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression094.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 224472,
+            "offset": 424015872,
+            "d4": 145448,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression095.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 258280,
+            "offset": 426840064,
+            "d4": 159652,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression096.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 271840,
+            "offset": 426151936,
+            "d4": 179340,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression099.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 712700,
+            "offset": 414115840,
+            "d4": 309936,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression100.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 198004,
+            "offset": 429457408,
+            "d4": 120640,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression101.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 240920,
+            "offset": 430094336,
+            "d4": 138684,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression102.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 260560,
+            "offset": 423383040,
+            "d4": 154728,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression104.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 173064,
+            "offset": 429983744,
+            "d4": 109408,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression107.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 257832,
+            "offset": 428761088,
+            "d4": 169924,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression108.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 732344,
+            "offset": 417591296,
+            "d4": 341076,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression109.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 486112,
+            "offset": 418213888,
+            "d4": 224200,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression110.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 293880,
+            "offset": 424886272,
+            "d4": 184612,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression111.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 198004,
+            "offset": 429215744,
+            "d4": 120640,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression112.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 220608,
+            "offset": 426500096,
+            "d4": 138112,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression114.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 376972,
+            "offset": 425259008,
+            "d4": 258184,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression115.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 92544,
+            "offset": 246056960,
+            "d4": 50424,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression116.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 627836,
+            "offset": 419328000,
+            "d4": 194392,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression117.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 92544,
+            "offset": 245735424,
+            "d4": 53244,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression121.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 92544,
+            "offset": 245899264,
+            "d4": 53788,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression124.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 189784,
+            "offset": 428021760,
+            "d4": 116024,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression125.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 92544,
+            "offset": 245567488,
+            "d4": 59136,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression127.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 302996,
+            "offset": 425644032,
+            "d4": 185980,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression128.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 1107360,
+            "offset": 244819968,
+            "d4": 638124,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression129.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 214864,
+            "offset": 427755520,
+            "d4": 131268,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression131.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 92544,
+            "offset": 245514240,
+            "d4": 51524,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression133.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 350076,
+            "offset": 428300288,
+            "d4": 231072,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression135.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 858508,
+            "offset": 421353472,
+            "d4": 381544,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression136.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 92544,
+            "offset": 245682176,
+            "d4": 51456,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "decompression137.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 214864,
+            "offset": 427622400,
+            "d4": 131268,
+            "Files": []
+        }
+    ]
+}

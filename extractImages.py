@@ -1,8 +1,5 @@
-from genericpath import exists
 import os
-from os.path import dirname, join
-
-from cv2 import FastFeatureDetector
+from os.path import dirname
 
 from tools.texture import *
 from tools.conversions import *
@@ -34,40 +31,41 @@ def get_all_tpl_headers(b:bytes) -> list[TPLTextureHeader]:
     return image_headers
 
 def validate_tpl_header(header: TPLTextureHeader) -> bool:
-    return header.format in VALID_IMAGE_FORMATS and header.width % 4 == 0 and header.height % 4 == 0
+    return header.format in VALID_IMAGE_FORMATS and header.width % 4 == 0 and header.height % 4 == 0 and header.height > 0 and header.width > 0
 
+def _assert(a:any):
+    assert(a)
 
 TEXTURE_PARSE_FUNCTIONS = {
-    0x1: (lambda a, b: None),  # I4
-    0x2: (lambda a, b: None),  # I8
-    0x3: (lambda a, b: None),  # IA4
-    0x4: (lambda a, b: None),  # RGB565
-    0x5: (lambda a, b: None),  # RGB5A3
-    0x6: (lambda a, b: None),  # RGBA32
+    0x1: (lambda a, b: _assert(False)),  # I4
+    0x2: (lambda a, b: _assert(False)),  # I8
+    0x3: (lambda a, b: _assert(False)),  # IA4
+    0x4: (lambda a, b: _assert(False)),  # RGB565
+    0x5: (lambda a, b: _assert(False)),  # RGB5A3
+    0x6: (lambda a, b: _assert(False)),  # RGBA32
     0x8: (lambda a, b: TPLFileC4.parse_source(a, b)),  # C4
-    0x9: (lambda a, b: None),  # C8
-    0xa: (lambda a, b: None),  # C14X2
+    0x9: (lambda a, b: TPLFileC8.parse_source(a, b)),  # C8
+    0xa: (lambda a, b: _assert(False)),  # C14X2
     0xe: (lambda a, b: TPLFileCMPR.parse_source(a, b)),  # CMPRs
 }
 
-def write_images(filename:str, output_dir:str, part_of_file:int, write_mtl:bool = False) -> bool:
+def write_images(filename:str, output_dir:str, part_of_file:int, write_mtl:bool = False, image_header:str = "") -> bool:
+    images = export_images(filename, part_of_file)
     try:
-        images = export_images(filename, part_of_file)
-
         image_files = []
         for i, (img, img_format) in enumerate(images):
             if img is None:
                 continue
 
-            img_file = os.path.join(output_dir, f"{i}.png")
+            img_file = os.path.join(output_dir, image_header+f"{i}.png")
             image_files.append(img_file)
             img.save(img_file)
 
         mtl_file = [(f"mssbMtl.{ii}", i_name) for ii, i_name in enumerate(image_files)]
         if write_mtl:
-            return write_mtl_file(os.path.join(output_dir, "mtl.mtl"), mtl_file)
+            return write_mtl_file(os.path.join(output_dir, image_header+"mtl.mtl"), mtl_file)
         return True
-    except:
+    except IndexError:
         return False
 
 def export_images(filename:str, part_of_file:int) -> list[tuple[Image.Image, str]]:

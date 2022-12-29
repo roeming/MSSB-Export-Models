@@ -277,9 +277,7 @@ class DisplayObjectLightingHeader:
         self.componentSigned = self.QUANTIZE_INFO["signed info"][self.format]
 
         self.numberOfComponents = i[3]
-        ba = bytearray(b[8:12])
-        ba.reverse()
-        self.ambientBrightness = float_from_bytes(ba)
+        self.ambientBrightness = float_from_bytes(b[8:12])
 
     def add_offset(self, offset:int)->None:
         if self.offsetToNormalArray != 0:
@@ -348,6 +346,19 @@ class DisplayObjectDisplayState:
         return t
 
 @dataclass
+class Vector4:
+    X:float
+    Y:float
+    Z:float
+    W:float
+    
+    def __str__(self) -> str:
+        return f"{self.X} {self.Y} {self.Z} {self.W}"
+
+    def __getitem__(self, key):
+        return [self.X, self.Y, self.Z, self.W][key]
+
+@dataclass
 class Vector3:
     X:float
     Y:float
@@ -413,10 +424,10 @@ class OBJGroup:
     normals: list[NormalVector]
 
     faces: list[OBJFace]
+    comments:list[str]
 
     mtl:"typing.any" = None
     name:"typing.any" = None
-
     def __str__(self) -> str:
         t = ""
 
@@ -425,6 +436,10 @@ class OBJGroup:
     
         if self.mtl != None:
             t += f"usemtl {self.mtl}\n"
+
+        if self.comments is not None:
+            for c in self.comments:
+                t += f"# {c}\n"
 
         for p in self.positions:
             t += f"{p}\n"

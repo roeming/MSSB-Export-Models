@@ -1457,6 +1457,179 @@
                     "Entry": 8
                 }
             ]
+        },
+        {
+            "Input": "aaaa.dat",
+            "Output": "decompression0001.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 1058788,
+            "offset": 2048,
+            "d4": 370712,
+            "Files": []
+        },
+        {
+            "Input": "ZZZZ.dat",
+            "Output": "_StockData.dat",
+            "b1": 11,
+            "b2": 4,
+            "size": 858508,
+            "offset": 421353472,
+            "d4": 381544,
+            "Files": [
+                {
+                    "Type": "Model",
+                    "Entry": 1
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 2
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 4
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 5
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 7
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 8
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 10
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 12
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 13
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 14
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 16
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 17
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 19
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 20
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 22
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 23
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 25
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 26
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 28
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 29
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 31
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 32
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 34
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 35
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 37
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 38
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 40
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 41
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 43
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 44
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 46
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 47
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 49
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 50
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 52
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 53
+                },
+                {
+                    "Type": "Model",
+                    "Entry": 55
+                },
+                {
+                    "Type": "Texture",
+                    "Entry": 56
+                }
+            ]
         }
     ]
 }

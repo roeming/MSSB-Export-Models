@@ -1,0 +1,58 @@
+a, b, c, v1, v2, v3, and v4 are all numbers
+output is a list
+
+
+while a is not 0
+    v1 is Func(1)
+
+    if v1 is 1
+        v2 is Func(8)
+        
+        append v2 to the end of output
+        
+        subtract 1 from a
+    else
+        v2 is Func(b) 
+        v3 is Func(c)
+
+        add 2 to v3
+
+        subtract v3 from a
+
+        if v3 > length of output
+            exit
+
+        while v3 is not 0
+            v4 is the v2th entry from the end of output
+            append v4 to the end of output
+            
+            subtract 1 from v3
+
+
+bitsInBuffer is a number
+buffer is a number
+
+readBitsFunction(int numberOfBits)
+    bits = 0
+    if bitsInBuffer >= numberOfBits:
+        bits = buffer & (0xffffffff >> (32 - numberOfBits))
+        buffer >>= numberOfBits
+        bitsInBuffer -= numberOfBits
+    else:
+        bitsNeededToRead = numberOfBits - bitsInBuffer
+        bits = buffer << bitsNeededToRead
+
+        a = readByteFunction()
+        b = readByteFunction()
+        c = readByteFunction()
+        d = readByteFunction()
+        
+        nextdata = (a << 24) | (b << 16) | (c << 8) | d
+        
+        bitsInBuffer = 32 - bitsNeededToRead
+        
+        bits |= nextData & (0xffffffff >> bitsInBuffer)
+
+        buffer = nextData >> bitsNeededToRead
+    return bits
+

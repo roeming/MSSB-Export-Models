@@ -1,0 +1,59 @@
+```
+Starting with the bad news first, there's lots of randomness when it comes to deciding a Vertical Trajectory.
+Using your ContactZone(Left/Right Sour/Nice/Perfect) and Slap/Charge, 5 different angle ranges are given.
+A range is randomly selected, and then an angle is randomly selected from within that range.
+
+The good part is that you have some influence over if a range is picked.
+Each of the 5 ranges for your hit has a percentage chance.
+```
+
+*** INSERT PIC OF HIGH NICE CHARGE HERE ***
+
+```
+The ranges will be identical for every character as long as they have the same Slap/Charge and ContactZone, but the probabilities will change based on your character's VerticalTrajPreference: Low, Mid, or High.
+```
+
+*** INSERT PIC OF LOW NICE CHARGE HERE ***
+
+```
+Characters with high traj will assign higher probabilities to higher angles than a character with mid traj or low traj (Most of the time).
+Characters with low traj will assign higher probabilities to lower angles than a character with mid traj or high traj (Most of the time).
+
+However you can influence these numbers. By holding Up/Down, you can move around the probabilities.
+By holding Up, you remove the top 2 angle ranges, and their probability get added to the lowest angle range.
+By holding Down, you remove the lowest angle range, and its probability gets added to the highest angle range.
+
+This allows someone with low traj to move their high probability of the lowest angle range to the highest angle.
+```
+
+
+```
+However, there will always be weirdness in MSSB.
+Almost all ranges are symmetric based on left/right contact. Except for sour slaps.
+
+All LeftSour Slaps (Batting Righty) have a similar looking probability range, with the highest angle having the highest probability.
+All RightSour Slaps (Batting Lefty) have a similar looking probability range, with the lowest angle having the highest probability.
+```
+
+*** INSERT PIC OF LEFT SOUR SLAP HERE ***
+*** INSERT PIC OF RIGHT SOUR SLAP HERE ***
+
+```
+If you were to slap at a pitch that is either a change up, or a charge pitch (non-perfect) and you get sour contact, that hit will only ever have 1 vertical trajectory.
+It's a steep angle, which makes for an easy out.
+```
+
+*** INSERT PIC OF CHARGE/CHANGEUP SOUR SLAP HERE ***
+
+```
+StarHits usually have only 1 angle for the entirety of contact, and do not care if you charge starred.
+Some StarHits taper off at sour contact, so nice or perfect contact will still get a better angle, but all angles are reasonable.
+
+Then you get to the Falcon Pop.
+Falcon Pop has 1 angle per contact.
+However, this angle rises from LeftSour (Batting Righty) to RightSour (Batting Lefty).
+This means that if you're batting lefty your angles for Falcon Pop are super high, and easily catchable.
+```
+
+*** INSERT PIC OF FALCON POP LEFT SLAP HERE ***
+*** INSERT PIC OF FALCON POP RIGHT SLAP HERE ***

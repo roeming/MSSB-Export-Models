@@ -1,0 +1,69 @@
+8069c6d4
+
+randInt
+80892684
+
+float to score
+807AE8B0
+
+4.0
+807ada68
+
+
+or with
+111110000000000
+and with
+111111011111111
+
+load rand int
+or with 7C00
+and with 7EFF
+rotate left 15
+write float
+read float
+read "4.0"
+mult
+store
+
+
+808928a0
+
+8069c6e4
+# start at 8069c6e8
+lwz r0, -0x21C(r31) # load rand
+
+lis r3, -0x7f86
+addi r31, r3, 0x78B0
+addi r31, r31, 0x7000 # point to bases needed to score
+
+
+li r3, 0x7c00 # mask top bits
+or r0,r0,r3
+
+li r3, 0x7bff # mask bottom bits
+and r0,r0,r3
+
+rlwinm r0,r0,15, 0, 31 # r0 now has between 0.0078 and 0.125
+
+li r3,0x4200 # create 32 in float
+rlwinm r3,r3,16, 0, 31
+
+
+stw r3,  0x0(r31) # store 32.0 at point
+
+lfs f31, 0x0(r31) # load 32 into f31
+
+stw r0,  0x0(r31) # store random at point
+
+lfs f30, 0x0(r31) # load rand into f30
+
+fmuls f31,f31,f30 # multiply these numbers
+
+
+stfs f31, 0x0(r31) # store final number
+
+
+lis r3, -0x7f77 #
+addi r31, r3, 0x28a0 # return r31 pointer to correct place
+
+lbz r0, 0xad(r31) # replace instruction we took

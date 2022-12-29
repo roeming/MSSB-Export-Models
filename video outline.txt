@@ -1,0 +1,13 @@
+(intro to the game/ intro to the problem)
+
+(how it was found)
+
+(finding the code that was reading the files)
+
+(extracting the code into more readable code / simplifying it even more)
+
+(talking about the behavior seen)
+
+(talking about the missing link)
+
+

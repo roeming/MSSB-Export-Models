@@ -11,7 +11,7 @@ def main():
     part_of_file = int(input("Input part of file: "))
     export_model(file_name, dirname(file_name), part_of_file)
 
-def export_model(file_name:str, output_directory:str, part_of_file = 2):
+def export_model(file_name:str, output_directory:str, part_of_file = 2, mtl_header:str = ""):
 
     if not exists(file_name):
         print("File doesn't exist")
@@ -41,9 +41,11 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
         d.add_offset(base_gpl)
         n = ""
         n_offset = d.offsetToName
+        assert(n_offset < len(file_bytes))
         while file_bytes[n_offset] != 0:
             n += chr(file_bytes[n_offset])
             n_offset += 1
+            assert(n_offset < len(file_bytes))
         d.name = n
 
     
@@ -111,9 +113,11 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
 
         dods = [DisplayObjectDisplayState(file_bytes[dod.offsetToDisplayStateList + i * DisplayObjectDisplayState.SIZE_OF_STRUCT:][:DisplayObjectDisplayState.SIZE_OF_STRUCT]) for i in range(dod.numberOfDisplayStateEntries)]
         all_draws = []
-        print(d)
+        # print(d)
 
         texture_index = None
+        matrix_src = None
+        matrix_dst = None
         for dod_i, dod in enumerate(dods):
             dod.add_offset(dol_offset)
             # print(dod)
@@ -122,7 +126,7 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
                 h = hex(dod.setting)[2:]
                 if len(h) == 8 and h[2:4] == "11":
                     texture_index = dod.setting & 0xff
-                    print(f"loading Texture {texture_index}")
+                    # print(f"loading Texture {texture_index}")
             elif dod.stateID == 2: # Vertex Description
 
                 size_conversion = {
@@ -143,7 +147,8 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
                 }
 
             elif dod.stateID == 3: # Matrix Load
-                pass
+                matrix_src = dod.setting >> 16
+                matrix_dst = dod.setting & 0xffff
             else:
                 print(f"Unknown Display Call: {dod.stateID}")
                 assert(False)
@@ -151,21 +156,21 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
             if(dod.offsetToPrimitiveList != 0):
                 tris = parse_indices(file_bytes[dod.offsetToPrimitiveList:][:dod.byteLengthPrimitiveList], **comps)
                 # these_tris.extend(tris)
-                all_draws.append((tris, texture_index))
+                all_draws.append((tris, texture_index, [f"Using Texture {texture_index}", f"Using Matrix {matrix_src}, {matrix_dst}", f"Display Object {dod_i}"]))
 
 
         # Write to Obj
-        mtl_file = "mtl.mtl"
-        
+        mtl_file = mtl_header + "mtl.mtl"
         with open(os.path.join(output_directory, d.name + ".obj"), "w") as f:
             coord_group = OBJGroup(
                 positions=poss,
                 textures=tex_coords,
                 normals=norms,
-                faces=[]
+                faces=[],
+                comments=[]
                 )
 
-            draw_groups = [OBJGroup(positions=[], textures=[], normals=[], faces=gg[0], mtl=f"mssbMtl.{gg[1]}" if gg[1] != None else None, name=f"group{obj_part}") for obj_part, gg in enumerate(all_draws)]
+            draw_groups = [OBJGroup(positions=[], textures=[], normals=[], faces=gg[0], mtl=f"mssbMtl.{gg[1]}" if gg[1] != None else None, name=f"group{obj_part}", comments=gg[2]) for obj_part, gg in enumerate(all_draws)]
             
             draw_groups = [coord_group] + draw_groups
 

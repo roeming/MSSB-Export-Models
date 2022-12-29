@@ -16,7 +16,7 @@ def main():
     ZZZZ_file_name = "ZZZZ.dat"
     ZZZZ_hash = "b0cd4f776d023df4dee52086cc3475a5285ce3be"
     json_file_name = "CharacterModels.json"
-    json_extra_file_name = "DolReads.json"
+    json_extra_file_name = "foundRelFiles.json"
 
     output_folder = "Outputs"
 
@@ -118,12 +118,12 @@ def regular_decompress(entries, output_folder):
                 del decompressor
 
             for f in d["Files"]:
-                
+                mtl_header = "{0}_".format(f["Entry"])
                 if f["Type"] == "Texture":
-                    extractImages.write_images(output_file, new_folder, f["Entry"], True)
+                    extractImages.write_images(output_file, new_folder, f["Entry"], True, "{0}_".format(f["Entry"]))
                 
                 elif f["Type"] == "Model":
-                    extractModel.export_model(output_file, new_folder, f["Entry"])
+                    extractModel.export_model(output_file, new_folder, f["Entry"], "{0}_".format(f["Entry"] + 1))
             
             print(f"Finished decompressing {this_file}\n")
 
@@ -147,52 +147,54 @@ def brute_force_decompress(entries, output_folder):
             print(f"Starting write {this_file}")
             new_folder = os.path.join(output_folder, this_file.split(".")[0])
 
-            if not exists(new_folder):
-                os.mkdir(new_folder)
-
             output_file = os.path.join(new_folder, this_file)
-            mssbDecompress.decompress(d["Input"], output_file, d["offset"], d["size"], d["b1"], d["b2"])
-            
-            output_note_file = os.path.join(new_folder, "notes.txt")
-            output_notes = []
-            file_size = os.path.getsize(output_file)
-            archive_counter = 0
-            with open(output_file, "rb") as f:
-                while True:
-                    e = int_from_bytes(f.read(4))
-                    if e == 0:
-                        possible_archive = True
-                        break
-                    elif e < file_size:
-                        archive_counter += 1
-                    else:
-                        possible_archive = False
-                        break
-            
-            if possible_archive:
-                output_notes.append("Possibly an archive\n")
+            if not exists(output_file):
+                decompressor = mssbDecompress.MSSBDecompressor(d["Input"], d["offset"], d["size"], d["b1"], d["b2"])
+                
+                decompressed_file = decompressor.decompress()
+                if decompressed_file is None:
+                    print(f"failed to decompress {this_file}, skipping")
+                    continue
+        
+                if not exists(new_folder):
+                    os.mkdir(new_folder)
 
-                for i in range(archive_counter):
+                success = write_bytes(output_file, decompressed_file)
+                del decompressed_file
+
+                if not success:
+                    print(f"failed to write {this_file}, skipping")
+                    continue
+
+                write_bytes(output_file + ".raw", decompressor.byte_reader.allBytes)
+                del decompressor
+            parts_of_file = get_parts_of_file(output_file)
+            note_file = os.path.join(new_folder, "notes.txt")
+            notes = []
+
+
+            if parts_of_file != None:
+                for i in range(len(parts_of_file)):        
                     try:
-                        extractModel.export_model(output_file, new_folder, i)
-                        output_notes.append(f"Part {i} is a model\n")
-                        continue
-                    except:
+                        if extractImages.write_images(output_file, new_folder, i, True, image_header=f"{i}_"):
+                            notes.append(f"Part {i} is a texture")
+                            continue
+                    except AssertionError:
                         pass
-                    
+
                     try:
-                        extractImages.export_images(output_file, new_folder, i, f"entry{i}_")
-                        output_notes.append(f"Part {i} is a texture\n")
+                        extractModel.export_model(output_file, new_folder, i, mtl_header=f"{i}_")
+                        notes.append(f"Part {i} is a model")
                         continue
-                    except:
+                    except AssertionError:
                         pass
-                    output_notes.append(f"Part {i} is unknown\n")
-                        
+
+                    notes.append(f"Part {i} is unknown")
             else:
-                output_notes.append("Not an archive\n")
-
-            with open(output_note_file, "w") as f:
-                f.writelines(output_notes)
+                notes.append("Not an archive")
+            write_lines(note_file, notes)
+            
+            print(f"Finished decompressing {this_file}\n")
 
         except AssertionError as err:
             print(f"Failed to decompress {this_file}, {err=}, skipping")

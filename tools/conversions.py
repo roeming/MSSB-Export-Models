@@ -22,7 +22,17 @@ def float_from_fixedpoint(a:int, shift:int):
     return a / (1 << shift)
 
 def float_from_bytes(b: bytes):
-    return unpack("f", b)[0]
+    ba = bytearray(b)
+    ba.reverse()
+    return unpack("f", ba)[0]
 
 def sublist(list, offset:int, count:int):
     return list[offset:][:count]
+
+def c_string_from_bytes(b:bytes) -> str:
+    t = ""
+    i = 0
+    while b[i] != 0:
+        t+= chr(b[i])
+        i += 1
+    return t
