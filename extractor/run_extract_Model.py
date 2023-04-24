@@ -1,62 +1,46 @@
-from genericpath import exists
-import os
-from posixpath import dirname
+from os.path import dirname, join, exists
+from helper_vector import *
+from helper_obj_file import *
+from helper_c3 import *
+from helper_mssb_data import *
 
-from tools.graphics import *
-from tools.conversions import *
-from tools.file_helper import get_parts_of_file
+from helper_mssb_data import get_parts_of_file, float_from_fixedpoint
 
 def main():
     file_name = input("Input file name: ")
     part_of_file = int(input("Input part of file: "))
     export_model(file_name, dirname(file_name), part_of_file)
 
-def export_model(file_name:str, output_directory:str, part_of_file = 2):
+def export_model(file_bytes:bytearray, output_directory:str, part_of_file = 2, mtl_header:str = ""):
 
-    if not exists(file_name):
-        print("File doesn't exist")
-        exit()
-    
-    file_bytes = None
-    with open(file_name, "rb") as f:
-        file_bytes = f.read()
+    parts_of_file = get_parts_of_file(file_bytes)
 
-    parts_of_file = get_parts_of_file(file_name)
-    offset = 0
-    while True:
-        p = int_from_bytes(file_bytes[offset:offset+4])
-        if p == 0:
-            break
-        parts_of_file.append(p)
-        offset += 4
-    del p
+    base_gpl_address = parts_of_file[part_of_file]
+    geo_header = GeoPaletteHeader(file_bytes, base_gpl_address)
+    geo_header.add_offset(base_gpl_address)
+    
+    descriptors:list[GeoDescriptor] = []
+    
+    for i in range(geo_header.numberOfGeometryDescriptors):
+        gd_offset = geo_header.offsetToGeometryDescriptorArray + i * GeoDescriptor.SIZE_OF_STRUCT
+        d = GeoDescriptor(file_bytes, gd_offset)
 
-    base_gpl = parts_of_file[part_of_file]
-    geo_header = GeoPaletteHeader(file_bytes[base_gpl:][:GeoPaletteHeader.SIZE_OF_STRUCT])
-    geo_header.add_offset(base_gpl)
-    
-    descriptors = [GeoDescriptor(file_bytes[geo_header.offsetToGeometryDescriptorArray + i * GeoDescriptor.SIZE_OF_STRUCT:][:GeoDescriptor.SIZE_OF_STRUCT]) for i in range(geo_header.numberOfGeometryDescriptors)]
-    
-    for d in descriptors:
-        d.add_offset(base_gpl)
-        n = ""
-        n_offset = d.offsetToName
-        while file_bytes[n_offset] != 0:
-            n += chr(file_bytes[n_offset])
-            n_offset += 1
-        d.name = n
+        d.add_offset(base_gpl_address)
+        MAX_NAME_LENGTH = 100
+        
+        d.name = get_c_str(file_bytes, d.offsetToName)
 
-    
-    for d in descriptors:
+        descriptors.append(d)
+
         dol_offset = d.offsetToDisplayObject
-        dol = DisplayObjectLayout(file_bytes[dol_offset:][:DisplayObjectLayout.SIZE_OF_STRUCT])
+        dol = DisplayObjectLayout(file_bytes, dol_offset)
         dol.add_offset(dol_offset)
 
-        dop = DisplayObjectPositionHeader(file_bytes[dol.OffsetToPositionData:][:DisplayObjectPositionHeader.SIZE_OF_STRUCT])
+        dop = DisplayObjectPositionHeader(file_bytes, dol.OffsetToPositionData)
         dop.add_offset(dol_offset)
 
         poss = parse_array_values(
-            file_bytes[dop.offsetToPositionArray :][:(dop.numberOfPositions * (dop.componentSize * dop.numberOfComponents))],
+            file_bytes[dop.offsetToPositionArray : dop.offsetToPositionArray + (dop.numberOfPositions * (dop.componentSize * dop.numberOfComponents))],
             3,
             dop.componentSize, 
             dop.componentSize * dop.numberOfComponents,
@@ -65,20 +49,16 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
             PositionVector
             )
 
-        doc = DisplayObjectColorHeader(file_bytes[dol.OffsetToColorData:][:DisplayObjectColorHeader.SIZE_OF_STRUCT])
+        doc = DisplayObjectColorHeader(file_bytes, dol.OffsetToColorData)
         doc.add_offset(dol_offset)
 
         dot = []
         tex_coords = []
         for i in range(dol.numberOfTextures):
-            dd = DisplayObjectTextureHeader(file_bytes[dol.OffsetToTextureData + i * DisplayObjectTextureHeader.SIZE_OF_STRUCT:][: DisplayObjectTextureHeader.SIZE_OF_STRUCT])
+            dd = DisplayObjectTextureHeader(file_bytes, dol.OffsetToTextureData + i * DisplayObjectTextureHeader.SIZE_OF_STRUCT)
             dd.add_offset(dol_offset)
-            n_offset = dd.offsetToTexturePaletteFileName
-            n = ""
-            while file_bytes[n_offset] != 0:
-                n += chr(file_bytes[n_offset])
-                n_offset += 1
-            dd.name = n
+
+            dd.name = get_c_str(file_bytes, dd.offsetToTexturePaletteFileName)
 
             dot.append(dd)
 
@@ -93,7 +73,7 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
                     TextureVector
                     )
 
-        doli = DisplayObjectLightingHeader(file_bytes[dol.OffsetToLightingData:][:DisplayObjectLightingHeader.SIZE_OF_STRUCT])
+        doli = DisplayObjectLightingHeader(file_bytes, dol.OffsetToLightingData)
         doli.add_offset(dol_offset)
 
         norms = parse_array_values(
@@ -106,14 +86,16 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
             NormalVector
             )
 
-        dod = DisplayObjectDisplayHeader(file_bytes[dol.OffsetToDisplayData:][:DisplayObjectDisplayHeader.SIZE_OF_STRUCT])
+        dod = DisplayObjectDisplayHeader(file_bytes, dol.OffsetToDisplayData)
         dod.add_offset(dol_offset)
 
-        dods = [DisplayObjectDisplayState(file_bytes[dod.offsetToDisplayStateList + i * DisplayObjectDisplayState.SIZE_OF_STRUCT:][:DisplayObjectDisplayState.SIZE_OF_STRUCT]) for i in range(dod.numberOfDisplayStateEntries)]
+        dods = [DisplayObjectDisplayState(file_bytes, dod.offsetToDisplayStateList + i * DisplayObjectDisplayState.SIZE_OF_STRUCT) for i in range(dod.numberOfDisplayStateEntries)]
         all_draws = []
-        print(d)
+        # print(d)
 
         texture_index = None
+        matrix_src = None
+        matrix_dst = None
         for dod_i, dod in enumerate(dods):
             dod.add_offset(dol_offset)
             # print(dod)
@@ -122,7 +104,7 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
                 h = hex(dod.setting)[2:]
                 if len(h) == 8 and h[2:4] == "11":
                     texture_index = dod.setting & 0xff
-                    print(f"loading Texture {texture_index}")
+                    # print(f"loading Texture {texture_index}")
             elif dod.stateID == 2: # Vertex Description
 
                 size_conversion = {
@@ -143,41 +125,40 @@ def export_model(file_name:str, output_directory:str, part_of_file = 2):
                 }
 
             elif dod.stateID == 3: # Matrix Load
-                pass
+                matrix_src = dod.setting >> 16
+                matrix_dst = dod.setting & 0xffff
             else:
-                print(f"Unknown Display Call: {dod.stateID}")
-                assert(False)
+                raise ValueError(f"Unknown Display Call: {dod.stateID}")
 
             if(dod.offsetToPrimitiveList != 0):
                 tris = parse_indices(file_bytes[dod.offsetToPrimitiveList:][:dod.byteLengthPrimitiveList], **comps)
                 # these_tris.extend(tris)
-                all_draws.append((tris, texture_index))
+                all_draws.append((tris, texture_index, [f"Using Texture {texture_index}", f"Using Matrix {matrix_src}, {matrix_dst}", f"Display Object {dod_i}"]))
 
 
         # Write to Obj
-        mtl_file = "mtl.mtl"
+        coord_group = OBJGroup(
+            positions=poss,
+            textures=tex_coords,
+            normals=norms,
+            faces=[],
+            comments=[]
+            )
+
+        draw_groups = [OBJGroup(positions=[], textures=[], normals=[], faces=gg[0], mtl=f"mssbMtl.{gg[1]}" if gg[1] != None else None, name=f"group{obj_part}", comments=gg[2]) for obj_part, gg in enumerate(all_draws)]
         
-        with open(os.path.join(output_directory, d.name + ".obj"), "w") as f:
-            coord_group = OBJGroup(
-                positions=poss,
-                textures=tex_coords,
-                normals=norms,
-                faces=[]
-                )
+        draw_groups = [coord_group] + draw_groups
 
-            draw_groups = [OBJGroup(positions=[], textures=[], normals=[], faces=gg[0], mtl=f"mssbMtl.{gg[1]}" if gg[1] != None else None, name=f"group{obj_part}") for obj_part, gg in enumerate(all_draws)]
-            
-            draw_groups = [coord_group] + draw_groups
+        mtl_file = join(mtl_header, "mtl.mtl")
+        obj_file = OBJFile(
+            groups=draw_groups, 
+            mtl_file=mtl_file
+            )
 
-            obj_file = OBJFile(
-                groups=draw_groups, 
-                mtl_file=mtl_file
-                )
+        # if not obj_file.assert_valid():
+        #     debug = 0
 
-            if(not obj_file.assert_valid()):
-                debug = 0
-
-            f.write(str(obj_file))
+        write_text(str(obj_file), join(output_directory, d.name + ".obj"))
 
 def parse_array_values(b:bytes, component_count:int, component_width:int, struct_size:int, fixed_point:int, signed:bool, cls=None)->list:
     to_return = []
@@ -186,7 +167,7 @@ def parse_array_values(b:bytes, component_count:int, component_width:int, struct
         c = []
         these_b = b[offset:][:struct_size]
         for i in range(component_count):
-            ii = int_from_bytes(these_b[i*component_width:][:component_width], signed=signed)
+            ii = int.from_bytes(these_b[i*component_width:][:component_width], 'big', signed=signed)
             f = float_from_fixedpoint(ii, fixed_point)
             c.append(f)
         to_return.append(c)        
@@ -267,23 +248,23 @@ def parse_indices(b: bytes, **kwargs) -> list:
         shifted_command = command >> 3
         if shifted_command in [0x10, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17]:
             assert(command & 0x7 == 0)
-            count = int_from_bytes(b[offset:][:2])
+            count = int.from_bytes(b[offset:][:2], 'big')
             offset += 2
             for i in range(count):
                 v = b[offset:][:vector_size]
                 vertex_parts = []
                 if pos_size > 0:
-                    pos = int_from_bytes(v[pos_offset:][:pos_size])
+                    pos = int.from_bytes(v[pos_offset:][:pos_size], 'big')
                 else:
                     pos = None
                 
                 if norm_size > 0:
-                    norm = int_from_bytes(v[norm_offset:][:norm_size])
+                    norm = int.from_bytes(v[norm_offset:][:norm_size], 'big')
                 else:
                     norm = None
                 
                 if uv_size > 0:
-                    uv = int_from_bytes(v[uv_offset:][:uv_size])
+                    uv = int.from_bytes(v[uv_offset:][:uv_size], 'big')
                 else:
                     uv = None
 
