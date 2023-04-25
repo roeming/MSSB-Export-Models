@@ -23,9 +23,9 @@ class OBJIndex:
 
 @dataclass
 class OBJIndices:
-    position_coordinate:OBJIndex=OBJIndex(None)
-    texture_coordinate:OBJIndex=OBJIndex(None)
-    normal_coordinate:OBJIndex=OBJIndex(None)
+    position_coordinate: OBJIndex = None
+    texture_coordinate: OBJIndex = None
+    normal_coordinate: OBJIndex = None
 
     def __str__(self) -> str:
         return "/".join(str(x) for x in [self.position_coordinate, self.texture_coordinate, self.normal_coordinate] if x != None)
