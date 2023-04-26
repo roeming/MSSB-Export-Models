@@ -34,11 +34,13 @@ class ArchiveDecompressor:
         self.bytes_to_decompress = bytearray(buffer)
         self.lookback_bit_count = lookback_bit_count
         self.repetition_bit_count = repetition_bit_count
-        self.__byte_index = 0
-        self.__bit_buffer = 0
-        self.__bits_in_buffer = 0
         self.original_size = original_size
+        self.__reset_buffer()
     
+    @property
+    def compressed_size(self):
+        return self.__byte_index
+
     def __read_int(self)->int:
         if(self.__byte_index + 3 >= len(self.bytes_to_decompress)):
             raise ValueError("No more ints to read")
@@ -688,6 +690,9 @@ class DataEntry(DataBytesInterpreter):
         if not isinstance(__o, DataEntry):
             return False
         return self.disk_location < __o.disk_location
+    
+    def __repr__(self) -> str:
+        return self.__str__()
 
 class FileCache:
     def __init__(self) -> None:
@@ -785,6 +790,8 @@ class MultipleRanges:
         self.__ranges.sort(key=lambda x: x.start)
     
     def __contains__(self, value):
+        if len(self.__ranges) == 0:
+            return False 
         # binary search
         max_ind = len(self.__ranges)
         min_ind = 0

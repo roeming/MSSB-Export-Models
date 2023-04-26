@@ -30,18 +30,25 @@ def draw_pic(zzzz_path:str, results_path:str, output_path="found.png"):
         entry = DataEntry.from_dict(entry_json)
         unreferencedCompressedRanges.add_range(range(entry.disk_location, entry.disk_location+100))
 
+    adGCRanges = MultipleRanges()
+    for entry_json in results['AdGCForms']:
+        entry = DataEntry.from_dict(entry_json)
+        adGCRanges.add_range(DataEntry.from_dict(entry_json).to_range())
+
     img = Image.new('RGB', (square_size, square_size), (0,0,0))
 
     WHITE_PIXEL  = (255, 255, 255)
     CYAN_PIXEL   = (0,255,255)
     ORANGE_PIXEL = (255, 191, 0)
     RED_PIXEL    = (255, 0, 0)
+    GREEN_PIXEL  = (0, 255, 0)
     print('Drawing ZZZZ picture...')
     for i, address in progressbar.progressbar([x for x in enumerate(range(0, data_length, 0x800))]):
         
         if   address in referencedCompressedRanges:     pix = CYAN_PIXEL
         elif address in referencedUncompressedRanges:   pix = ORANGE_PIXEL
         elif address in unreferencedCompressedRanges:   pix = RED_PIXEL
+        elif address in adGCRanges:                     pix = GREEN_PIXEL
         else:                                           pix = WHITE_PIXEL
         
         img.putpixel((i % square_size, i // square_size), pix)

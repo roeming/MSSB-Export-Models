@@ -1,5 +1,6 @@
 from helper_mssb_data import DataEntry, RollingDecompressor, ensure_dir, write_bytes, ArchiveDecompressor, get_parts_of_file, write_text
 from os.path import join, exists
+from os import rename
 from run_extract_Texture import export_images
 from run_extract_Model import export_model
 from run_file_discovery import discover_US_files, discover_beta_files, discover_JP_files, discover_EU_files
@@ -64,6 +65,7 @@ def interpret_version(output_folder:str, results_path:str, zzzz_file:str, discov
     REFERENCED_FOLDER = join(output_folder, 'Referenced files')
     UNREFERENCED_FOLDER = join(output_folder, 'Unreferenced files')
     RAW_FOLDER = join(output_folder, 'Raw files')
+    ADGCFORMS_FOLDER = join(output_folder, 'AdGCForms')
 
     if not exists(zzzz_file):
         return
@@ -79,6 +81,7 @@ def interpret_version(output_folder:str, results_path:str, zzzz_file:str, discov
     else:
         found_files = discovery_method()
         draw_pic(zzzz_file, results_path, join(output_folder, "results.png"))
+        
     if exists(file_name_path):
         with open(file_name_path, 'r') as f:
             file_names = json.load(f)
@@ -92,9 +95,18 @@ def interpret_version(output_folder:str, results_path:str, zzzz_file:str, discov
         if entry.file != zzzz_file:
             continue
         
-        this_file = offset_to_name.get(entry.disk_location, f'{entry.disk_location:08X}')
-
+        this_file = f'{entry.disk_location:08X}'
         this_folder = join(REFERENCED_FOLDER, this_file)
+
+        renamed_file = offset_to_name.get(entry.disk_location, None)
+        if renamed_file != None:
+            renamed_folder = join(REFERENCED_FOLDER, renamed_file)
+
+            if exists(this_folder) and not exists(renamed_folder):
+                rename(this_folder, renamed_folder)
+            
+            this_folder = renamed_folder
+            this_file = renamed_file
 
         output_file_name = join(this_folder, this_file) + ".dat"
 
@@ -115,9 +127,18 @@ def interpret_version(output_folder:str, results_path:str, zzzz_file:str, discov
         if entry.file != zzzz_file:
             continue
         
-        this_file = offset_to_name.get(entry.disk_location, f'{entry.disk_location:08X}')
-
+        this_file = f'{entry.disk_location:08X}'
         this_folder = join(UNREFERENCED_FOLDER, this_file)
+
+        renamed_file = offset_to_name.get(entry.disk_location, None)
+        if renamed_file != None:
+            renamed_folder = join(UNREFERENCED_FOLDER, renamed_file)
+
+            if exists(this_folder) and not exists(renamed_folder):
+                rename(this_folder, renamed_folder)
+            
+            this_folder = renamed_folder
+            this_file = renamed_file
 
         output_file_name = join(this_folder, this_file) + ".dat"
 
@@ -143,16 +164,57 @@ def interpret_version(output_folder:str, results_path:str, zzzz_file:str, discov
 
             write_bytes(decompressor.outputdata, output_file_name)
 
+    print("Interpreting AdGCForms files...")
+    for json_entry in progressbar.progressbar(found_files['AdGCForms']):
+        entry = DataEntry.from_dict(json_entry)
+        if entry.file != zzzz_file:
+            continue
         
+        this_file = f'{entry.disk_location:08X}'
+        this_folder = join(ADGCFORMS_FOLDER, this_file)
+
+        renamed_file = offset_to_name.get(entry.disk_location, None)
+        if renamed_file != None:
+            renamed_folder = join(ADGCFORMS_FOLDER, renamed_file)
+
+            if exists(this_folder) and not exists(renamed_folder):
+                rename(this_folder, renamed_folder)
+            
+            this_folder = renamed_folder
+            this_file = renamed_file
+
+        output_file_name = join(this_folder, this_file) + ".dat"
+
+        if not exists(output_file_name):
+
+            if entry.compression_flag == 0:
+                these_bytes = ZZZZ_DAT[entry.disk_location : entry.disk_location + entry.original_size]
+            else:
+                these_bytes = ArchiveDecompressor(ZZZZ_DAT[entry.disk_location:], entry.lookback_bit_size, entry.repetition_bit_size, entry.original_size).decompress()
+
+            interpret_bytes(these_bytes, this_folder)
+
+            write_bytes(these_bytes, output_file_name)
+
     print("Interpreting referenced raw files...")
     for json_entry in progressbar.progressbar(found_files['GameReferencedRawFiles']):
         entry = DataEntry.from_dict(json_entry)
         if entry.file != zzzz_file:
             continue
         
-        this_file = offset_to_name.get(entry.disk_location, f'{entry.disk_location:08X}')
-
+        this_file = f'{entry.disk_location:08X}'
         this_folder = join(RAW_FOLDER, this_file)
+
+        renamed_file = offset_to_name.get(entry.disk_location, None)
+
+        if renamed_file != None:
+            renamed_folder = join(RAW_FOLDER, renamed_file)
+
+            if exists(this_folder) and not exists(renamed_folder):
+                rename(this_folder, renamed_folder)
+            
+            this_folder = renamed_folder
+            this_file = renamed_file
 
         output_file_name = join(this_folder, this_file) + ".dat"
 

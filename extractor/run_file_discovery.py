@@ -2,6 +2,7 @@ from os.path import exists, dirname, join
 from os import makedirs
 from helper_mssb_data import DataEntry, FileCache, FingerPrintSearcher, MultipleRanges, ArchiveDecompressor, ensure_dir, write_text, write_bytes
 import json, progressbar
+from struct import unpack
 from helper_file_system import *
 
 file_cache = FileCache()
@@ -193,7 +194,7 @@ def discover_files(this_main: str, this_aaaa: str, this_zzzz: str, this_output_f
         file_mapping.add_range(known_file.to_range())
 
     # check new entries
-    print('Checking found compressed data...')
+    print('verifying found compressed data...')
     for new_entry in progressbar.progressbar(list_entries):
         new_entry:DataEntry
         entry_range = new_entry.to_range()
@@ -223,8 +224,63 @@ def discover_files(this_main: str, this_aaaa: str, this_zzzz: str, this_output_f
                     "compressionFlag": 0,
                 }))
                 file_mapping.add_range(range(i, i+size))
+    
+    ad_gc_search = this_zzzz_dat[:]
+    adgcform = b'AdGCForm'
+    ind = ad_gc_search.find(adgcform)
+    ad_gc_forms:list[DataEntry] = []
+    offset = 0
+    found_form_count = ad_gc_search.count(adgcform)
+    print(f'Verifying AdGCForms...')
+    bar = progressbar.ProgressBar(0, found_form_count)
+    bar.start()
+    form_i = 0
+    while ind != -1:
+        data_begins = ind + len(adgcform)
+        this_adgc_form_location = data_begins + offset
+        
+        finger_print = ad_gc_search[ind-8:ind]
+        
+        original_size, compression_info = unpack('<II', finger_print)
+        compressed_flag = original_size >> 28
+        original_size &= 0xfffffff
 
-    print('Checking found raw data...')
+
+        if compressed_flag == 0:
+            lookback_bit = 0
+            repetition_bit = 0
+            compressed_size = original_size
+        else:
+            lookback_bit = compression_info & 0xff
+            repetition_bit = (compression_info >> 8) & 0xff
+
+            decompressor = ArchiveDecompressor(this_zzzz_dat[this_adgc_form_location:], lookback_bit, repetition_bit, original_size)
+            decompressor.decompress()
+
+            compressed_size = decompressor.compressed_size
+
+        ad_gc_forms.append(DataEntry.from_dict({
+                "Input": this_zzzz,
+                "Output": join(this_output_folder, f"AdGCForm {this_adgc_form_location:08x}.dat"),
+                "lookbackBitSize": lookback_bit,
+                "repetitionBitSize": repetition_bit,
+                "size": original_size,
+                "offset": this_adgc_form_location,
+                "compressedSize": compressed_size,
+                "compressionFlag": compressed_flag,
+        }))
+
+        new_ad_gc_search = ad_gc_search[ind+len(adgcform):]
+        removed_space = len(ad_gc_search) - len(new_ad_gc_search)
+        offset += removed_space
+
+        ad_gc_search = new_ad_gc_search
+        ind = ad_gc_search.find(adgcform)
+        form_i += 1
+        bar.update(form_i)
+    bar.finish()
+
+    print('Verifying found raw data...')
     for new_entry in progressbar.progressbar(list_raw_entries):
         
         new_entry:DataEntry
@@ -242,116 +298,13 @@ def discover_files(this_main: str, this_aaaa: str, this_zzzz: str, this_output_f
         'GameReferencedCompressedFiles': [x.to_dict() for x in verified_entries],
         'GameReferencedRawFiles': [x.to_dict() for x in verified_raw_entries],
         'UnreferencedCompressedFiles': [x.to_dict() for x in unverified_aaaa_decompressions],
+        'AdGCForms': [x.to_dict() for x in ad_gc_forms],
     }
     
     with open(output_file, "w") as f:
         json.dump(output, f, indent=2)
     
     return output
-
-# def discover_files_(output_file: str):
-
-#     # make a list of all the files to search
-#     rels_to_search = [US_MAIN_FILE]
-#     for rel in KNOWN_AAAA_FILES:
-#         rel_output_path = join(OUTPUT_FOLDER, f'{rel.disk_location:x}.rel')
-#         rels_to_search.append(rel_output_path)
-
-#         if not exists(rel_output_path):
-#             write_bytes(decompress(rel), rel_output_path)
-    
-#     all_found_entries: set[DataEntry] = set()
-#     found_raw_entries:set[DataEntry] = set()
-
-#     # start mapping out all files
-#     verified_entries:list[DataEntry] = list()
-#     verified_entries.extend(KNOWN_AAAA_FILES + KNOWN_COMPRESSED_FILES)
-
-#     verified_raw_entries:list[DataEntry] = list()
-
-#     # accumulate all entries that look like a decompression fingerprint
-#     print("Searching rels...")
-#     for rel in progressbar.progressbar(rels_to_search):
-#         searcher = FingerPrintSearcher(file_cache.get_file_bytes(rel), US_ZZZZ_FILE)
-#         all_found_entries.update(searcher.search_compression(11, 4))
-#         found_raw_entries.update(searcher.search_uncompressed())
-
-#     list_entries = list(all_found_entries)
-#     list_entries.sort(key=lambda x: x.disk_location)
-#     # remove ones that look like the aaaa.dat files
-#     for rel in KNOWN_AAAA_FILES:
-#         list_entries = [x for x in list_entries if not rel.equals_besides_filename(x)]
-
-#     list_raw_entries = list(found_raw_entries)
-#     list_raw_entries.sort(key=lambda x: x.disk_location)
-
-#     # start mapping file    
-#     file_mapping = MultipleRanges()
-#     # add known movies because they're so big, they can eliminate any weird files
-#     for known_file in KNOWN_RAW_MOVIES:
-#         verified_raw_entries.append(known_file)
-#         file_mapping.add_range(known_file.to_range())
-    
-#     # check new entries
-#     print('Checking found compressed data...')
-#     for new_entry in progressbar.progressbar(list_entries):
-#         new_entry:DataEntry
-#         entry_range = new_entry.to_range()
-#         # can ignore the movie files
-#         # if file_mapping.does_overlap(entry_range):
-#         #     continue
-
-#         if is_decompression_valid(new_entry):
-#             new_entry.output_name = join(OUTPUT_FOLDER, "cmp " + new_entry.output_name.strip(US_ZZZZ_FILE))
-#             verified_entries.append(new_entry)
-#             file_mapping.add_range(entry_range)
-    
-#     unverified_decompressions:list[DataEntry] = list()
-#     zzzz_dat = file_cache.get_file_bytes(US_ZZZZ_FILE)
-#     formats_to_search = [(11,4,200)]
-#     for b1, b2, size in formats_to_search:
-#         print(f'Doing brute force decompression check ({b1} {b2})...')
-#         for i in progressbar.progressbar(range(0, len(zzzz_dat), 0x800)):
-#             if i in file_mapping:
-#                 continue
-#             if ArchiveDecompressor(zzzz_dat[i:i+2*size], b1, b2, size).is_valid_decompression():
-#                 unverified_decompressions.append(DataEntry.from_dict({
-#                     "Input": US_ZZZZ_FILE,
-#                     "Output": f"cmp unverified {i:x}.dat",
-#                     "lookbackBitSize": b1,
-#                     "repetitionBitSize": b2,
-#                     "size": 0,
-#                     "offset": i,
-#                     "compressedSize": 0,
-#                     "compressionFlag": 0,
-#                 }))
-#                 file_mapping.add_range(range(i, i+size))
-
-#     print('Checking found raw data...')
-#     for new_entry in progressbar.progressbar(list_raw_entries):
-        
-#         new_entry:DataEntry
-#         entry_range = new_entry.to_range()
-#         # if the proposed range overlaps with previous entries, skip
-#         if file_mapping.does_overlap(entry_range):
-#             continue
-
-#         # if is_decompression_valid(new_entry):
-#         new_entry.output_name = join(OUTPUT_FOLDER, "raw " + new_entry.output_name.strip(US_ZZZZ_FILE))
-#         verified_raw_entries.append(new_entry)
-#         file_mapping.add_range(new_entry.to_range())
-
-#     output = {
-#         'GameReferencedCompressedFiles': [x.to_dict() for x in verified_entries],
-#         'GameReferencedRawFiles': [x.to_dict() for x in verified_raw_entries],
-#         'UnreferencedCompressedFiles': [x.to_dict() for x in unverified_decompressions],
-#     }
-    
-#     with open(output_file, "w") as f:
-#         json.dump(output, f, indent=2)
-    
-#     return output
-
 
 def is_decompression_valid(d: DataEntry) -> bool:
     byte_data = file_cache.get_file_bytes(d.file)[d.disk_location : d.disk_location+d.compressed_size]
