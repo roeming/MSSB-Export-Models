@@ -2,11 +2,11 @@ MSSB Character Model Extractor v 1.0
 
 This program will extract all character models from Mario Superstar Baseball
 
-Please extract your ZZZZ.dat, aaaa.dat, and main.dol and put them in the extractor/data folder.
+Please extract your ZZZZ.dat, aaaa.dat, and main.dol and put them in the extractor/data/VERSION folder for the appropriate version.
 Make sure you have python installed, you can then double click run.bat to install the needed python libraries, and run the main program
 Alternatively, you can run `python main.py` while in the extractor folder
 
-The outputted files will be in the extractor/outputs folder.
+The outputted files will be in the extractor/outputs/version folder.
 
 If you want to name a file, add the name and location to the FileNames.json file. The 'Location' tag will be the folder name you wish to rename.
 

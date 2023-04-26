@@ -127,10 +127,11 @@ class TPLColorIA8(TPLColor):
 
     @classmethod
     def from_int(cls, i: int):
-        first_part = (i >> 8) & 0xff
-        second_part = (i) & 0xff
+        a = i & 0xFF
+        i = i >> 8
+        # return i | (i << 8) | (i << 16) | (a << 24);
         
-        cls.data = (second_part, second_part, second_part, first_part)
+        cls.data = (i, i, i, a)
         
         return cls
     
@@ -310,17 +311,17 @@ class TPLFileC8:
         byt = source[header.palette:][:0x200]
         palette = [int.from_bytes(byt[i*2:i*2+2], 'big') for i in range(0x100)]
 
-        if header.palette_format == 0: # IA8
-            func = TPLColorIA8
-            pixel_format = "RGBA"
-        elif header.palette_format == 1: # RGB565
-            func = TPLColorR5G6B5
-            pixel_format = "RGB"
-        elif header.palette_format == 2: # RGB5A3
-            func = TPLColorRGB5A3
-            pixel_format = "RGBA"
-        else:
-            assert(False)
+        # if header.palette_format == 0: # RGB565
+        #     func = TPLColorR5G6B5
+        #     pixel_format = "RGBA"
+        # elif header.palette_format == 1: # IA8
+        #     func = TPLColorIA8
+        #     pixel_format = "RGB"
+        # elif header.palette_format == 2: # RGB5A3
+        func = TPLColorRGB5A3
+        pixel_format = "RGBA"
+        # else:
+        #     assert(False)
 
         palette = [func.from_int(x).data for x in palette]
 
