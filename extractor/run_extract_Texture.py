@@ -25,7 +25,7 @@ def get_all_tpl_headers(b:bytes) -> list[TPLTextureHeader]:
     image_headers = []
 
     for i in range(image_count):
-        image_headers.append(TPLTextureHeader.from_bytes(b, 4 + TPLTextureHeader.SIZE_OF_STRUCT * i))
+        image_headers.append(TPLTextureHeader.from_bytes(b, 4 + TPLTextureHeader.SIZE_OF_STRUCT() * i))
     return image_headers
 
 def unimplemented_format(err:str):

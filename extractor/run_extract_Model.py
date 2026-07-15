@@ -22,7 +22,7 @@ def export_model(file_bytes:bytearray, output_directory:str, part_of_file = 2, m
     descriptors:list[GeoDescriptor] = []
     
     for i in range(geo_header.numberOfGeometryDescriptors):
-        gd_offset = geo_header.offsetToGeometryDescriptorArray + i * GeoDescriptor.SIZE_OF_STRUCT
+        gd_offset = geo_header.offsetToGeometryDescriptorArray + i * GeoDescriptor.SIZE_OF_STRUCT()
         d = GeoDescriptor(file_bytes, gd_offset)
 
         d.add_offset(base_gpl_address)
@@ -55,7 +55,7 @@ def export_model(file_bytes:bytearray, output_directory:str, part_of_file = 2, m
         dot = []
         tex_coords = []
         for i in range(dol.numberOfTextures):
-            dd = DisplayObjectTextureHeader(file_bytes, dol.OffsetToTextureData + i * DisplayObjectTextureHeader.SIZE_OF_STRUCT)
+            dd = DisplayObjectTextureHeader(file_bytes, dol.OffsetToTextureData + i * DisplayObjectTextureHeader.SIZE_OF_STRUCT())
             dd.add_offset(dol_offset)
 
             dd.name = get_c_str(file_bytes, dd.offsetToTexturePaletteFileName)
@@ -89,7 +89,7 @@ def export_model(file_bytes:bytearray, output_directory:str, part_of_file = 2, m
         dod = DisplayObjectDisplayHeader(file_bytes, dol.OffsetToDisplayData)
         dod.add_offset(dol_offset)
 
-        dods = [DisplayObjectDisplayState(file_bytes, dod.offsetToDisplayStateList + i * DisplayObjectDisplayState.SIZE_OF_STRUCT) for i in range(dod.numberOfDisplayStateEntries)]
+        dods = [DisplayObjectDisplayState(file_bytes, dod.offsetToDisplayStateList + i * DisplayObjectDisplayState.SIZE_OF_STRUCT()) for i in range(dod.numberOfDisplayStateEntries)]
         all_draws = []
         # print(d)
 

@@ -573,7 +573,6 @@ class RollingDecompressor():
     
 class DataBytesInterpreter:
     @classmethod
-    @property
     def SIZE_OF_STRUCT(cls):
         return calcsize(cls.DATA_FORMAT)
 
@@ -583,7 +582,7 @@ class DataBytesInterpreter:
         these_bytes = all_bytes[offset:offset+struct_size]
 
         if len(these_bytes) != struct_size:
-            raise ValueError(f'Ran out of bytes to interpret in {cls.__class__.__name__}, needed {cls.SIZE_OF_STRUCT}, received {len(these_bytes)}')
+            raise ValueError(f'Ran out of bytes to interpret in {cls.__class__.__name__}, needed {cls.SIZE_OF_STRUCT()}, received {len(these_bytes)}')
 
         return unpack(format_str, these_bytes)
 
@@ -826,7 +825,7 @@ class FingerPrintSearcher:
         found = set()
 
         ind = d.find(to_find)
-        while ind > 0 and len(d) >= DataEntry.SIZE_OF_STRUCT:
+        while ind > 0 and len(d) >= DataEntry.SIZE_OF_STRUCT():
             entry = DataEntry(d, ind, self.file_name)            
             # for now it has to be a mult of 2048 bytes, and not 0
             if entry.disk_location % 0x800 == 0 and entry.disk_location != 0:
@@ -844,7 +843,7 @@ class FingerPrintSearcher:
         found = set()
 
         ind = d.find(to_find)
-        while ind >= 0 and len(d[ind:]) >= DataEntry.SIZE_OF_STRUCT:
+        while ind >= 0 and len(d[ind:]) >= DataEntry.SIZE_OF_STRUCT():
             entry = DataEntry(d, ind, self.file_name)
             
             # for now it has to be a mult of 2048 bytes, and not 0
